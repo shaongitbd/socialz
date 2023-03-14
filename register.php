@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Regiter</title>
-</head>
+
+<?php require_once "header.php"; ?>
+<?php require_once "db.php"; ?>
 <body>
        <?php
-       $servername = "localhost";
-       $username = "root";
-       $password = "";
-       $database ="socialz";
-       $conn = mysqli_connect($servername,$username,$password,$database);
        
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -90,6 +79,6 @@ echo
 
 ?>
 
-
 </body>
+<?php require_once "footer.php"; ?>
 </html>
