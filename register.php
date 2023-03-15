@@ -1,11 +1,20 @@
 
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
+<?php require_once "auth_check.php"; ?>
 <body>
+
+if($_SESSION["LoggedIn"]){
+
+
+header("Location: home.php");
+
+}
        <?php
        
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     
         $username=$_POST["username"];
         $fname=$_POST["fname"];
         $lname=$_POST["lname"];
@@ -19,12 +28,19 @@
 
         $sql = "INSERT INTO user_info VALUES('$username','$fname','$lname','$gender','$email','$phone_no','$date_of_birth','$address','$password')";
         
-    
+       try{
         if (mysqli_query($conn, $sql)) {
-          echo "Data stored successfully.";
+         
+           header("Location: login.php");
+            
+         die();
+         }
+
               } 
-        else {
-          echo "Error: " . mysqli_error($sql);
+        catch (Exception $e) {
+           $_SESSION['message'] = 'Registration failed. Please check your infomation. ';
+            header("Location: register.php");
+
              }
     
     
@@ -37,42 +53,95 @@
        
 
 echo 
-'<center><form class="" action="" method="post">
-  <label for="fname">First name :</label><br>
-  <input type="text" id="fname" name="fname" required><br><br>
+'<form action="register.php" method="post"><div class=" flex justify-center items-center bg-gray-50">
+  
+  <div class="bg-white grid grid-cols-6 gap-4  px-12 py-8 rounded-md">
+   
+    <h1 class="text-gray-500 text-xl font-semibold"> Register </h1>
+    <?php echo $_SESSION["message"]?>
+    <div class="col-span-6"  >
+    <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+    <input class="block text-gray-900  placeholder-gray-300" type="text" id="fname" name="fname" required placeholder="First Name"/>
+   
 
+  </div>
+</div>
 
-  <label for="lname">Last name :</label><br>
-  <input type="text" id="lname" name="lname" required><br><br>
+<div class="col-span-6">
+    <div class=" bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300  rounded-md">
+    <input class="block text-gray-900  placeholder-gray-300" type="text" id="lname" name="lname" required placeholder="Last  Name"/>
+   
 
-  <label for="Gender">Gender :</label><br>
-  <input type="radio" id="gender" name="gender" value="Male" required>Male
-  <input type="radio" id="gender" name="gender" value="female" required>Female <br><br>
+  </div>
 
- 
-  <label for="fname">Email :</label><br>
-  <input type="email" id="email" name="email" required><br><br>
-
-  <label for="lname">Phone No :</label><br>
-  <input type="text" id="phone_no" name="phone_no" required><br><br>
 
   
-  <label for="fname">Date of Birth :</label><br>
-  <input type="date" id="dof" name="dof" required><br><br>
+</div>
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="text" id="email" name="email" required placeholder="Email"/>
+ 
 
-  <label for="lname">Address : </label><br>
-  <input type="text" id="address" name="address" required><br><br>
+</div>
+</div>
 
-  <label for="lname">Username : </label><br>
-  <input type="text" id="username" name="username" required><br><br>
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="text" id="phone_no" name="phone_no" required  placeholder="Phone number"/>
+ 
 
-  <label for="lname">Password : </label><br>
-  <input type="password" id="password" name="password" autocomplete="off" required><br><br>
-
-  <input type="submit" name="register">
+</div>
+</div>
 
 
-</form></center>';
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="date" id="dof" name="dof" required placeholder="Date of bith"/>
+ 
+
+</div>
+</div>
+
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="text" id="address" name="address" required placeholder="Address"/>
+ 
+
+</div>
+</div>
+
+<div class="col-span-6">
+    <div class=" bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300  rounded-md">
+    <input class="block text-gray-900  placeholder-gray-300" type="text" id="gender" name="gender" required placeholder="Gender"/>
+   
+
+  </div>
+
+
+
+
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
+ 
+
+</div>
+</div>
+
+<div class="col-span-6">
+  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+
+
+ 
+
+</div>
+</div>
+<button class="text-white block py-3 px-12  bg-red-600 rounded-lg text-md "  type="submit" > Submit </button>  
+
+
+</div>
+</form>';
 
        }
 
