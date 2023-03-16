@@ -51,34 +51,32 @@ header("Location: home.php");
        
 
 echo 
-'<div class=" container flex justify-center items-center bg-gray-50">
-  
-  <div class="bg-white grid grid-cols-3 gap-2  px-4 py-8 rounded-md">
-   
+'<div class="h-screen flex justify-center items-center  bg-gray-50">
+
+  <div class="bg-white    gap-2 px-8 py-6 rounded-md w-1/4">
+     <div class="col-span-2 mb-8">
     <h1 class="text-gray-500 text-md font-semibold"> Login </h1>
-   
+   </div>
 
 
 
 <form action="login.php" method="post">
-<div class="col-span-full">
-  <div class="bg-white mb-2 justify-center border-gray-300 px-1 py-1 border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm  placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
+<div class="mb-2">
+ 
+  <input class="w-full block text-gray-900 text-sm px-1 py-1.5 border border-gray-300 rounded-md" placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
  
 
 </div>
-</div>
 
-<div class="col-span-full">
-  <div class="bg-white justify-center border-gray-300 mb-2 px-1 py-1 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  text-sm placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+<div class="mb-2">
+
+  <input class="w-full block  text-gray-900  text-sm  bg-white border-gray-300 mb-2 px-1 py-1.5 border border-gray-300 rounded-md" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
 
 
  
 
 </div>
-</div>
-<button class="text-white block py-1.5 px-16  bg-red-600 rounded-lg text-sm "  type="submit" > Submit </button>  
+<button class="mt-6 text-white block py-1 w-full  bg-red-600 rounded-lg text-sm font-semibold "  type="submit" > Submit </button>  
 </form>
 
 </div></div>';

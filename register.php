@@ -54,7 +54,7 @@ header("Location: home.php");
        
 
 echo 
-'<form action="register.php" method="post"><div class="flex justify-center items-center bg-gray-50">
+'<form action="register.php" method="post"><div class=" h-screen flex justify-center items-center bg-gray-50">
   
   <div class="bg-white grid grid-cols-4 gap-4  px-12 py-8 rounded-md">
    

@@ -30,7 +30,7 @@ echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><di
 
 <a class="block text-gray-700  py-2 text-sm font-semibold" href=""> Friends</a>
 
-<a class="block text-gray-700  py-2 text-sm  font-semibold" href=""> Logout</a>
+<a class="block text-gray-700  py-2 text-sm  font-semibold" href="logout.php"> Logout</a>
 
 
 
