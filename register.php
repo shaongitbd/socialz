@@ -54,13 +54,13 @@ header("Location: home.php");
        
 
 echo 
-'<form action="register.php" method="post"><div class=" flex justify-center items-center bg-gray-50">
+'<form action="register.php" method="post"><div class="flex justify-center items-center bg-gray-50">
   
-  <div class="bg-white grid grid-cols-6 gap-4  px-12 py-8 rounded-md">
+  <div class="bg-white grid grid-cols-4 gap-4  px-12 py-8 rounded-md">
    
     <h1 class="text-gray-500 text-xl col-span-6 font-semibold"> Register </h1>
     <?php echo $_SESSION["message"]?>
-    <div class="col-span-3"  >
+    <div class="col-span-2"  >
     <div class="bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300 rounded-md">
     <input class="block text-gray-900  text-sm placeholder-gray-300" type="text" id="fname" name="fname" required placeholder="First Name"/>
    
@@ -68,9 +68,9 @@ echo
   </div>
 </div>
 
-<div class="col-span-3">
-    <div class=" bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300  rounded-md">
-    <input class="block text-gray-900  placeholder-gray-300" type="text" id="lname" name="lname" required placeholder="Last  Name"/>
+<div class="col-span-2">
+    <div class=" bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300  rounded-md">
+    <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="lname" name="lname" required placeholder="Last  Name"/>
    
 
   </div>
@@ -78,68 +78,72 @@ echo
 
   
 </div>
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="text" id="email" name="email" required placeholder="Email"/>
- 
 
-</div>
-</div>
 
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="text" id="phone_no" name="phone_no" required  placeholder="Phone number"/>
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="email" name="email" required placeholder="Email"/>
  
 
 </div>
 </div>
 
 
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="date" id="dof" name="dof" required placeholder="Date of bith"/>
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="phone_no" name="phone_no" required  placeholder="Phone number"/>
  
 
 </div>
 </div>
 
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="text" id="address" name="address" required placeholder="Address"/>
+
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="date" id="dof" name="dof" required placeholder="Date of bith"/>
  
 
 </div>
 </div>
 
-<div class="col-span-6">
-    <div class=" bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300  rounded-md">
-    <input class="block text-gray-900  placeholder-gray-300" type="text" id="gender" name="gender" required placeholder="Gender"/>
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="address" name="address" required placeholder="Address"/>
+ 
+
+</div>
+</div>
+
+<div class="col-span-4">
+    <div class=" bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300  rounded-md">
+    <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="gender" name="gender" required placeholder="Gender"/>
    
 
   </div>
 
 
+</div>
 
-
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
  
 
 </div>
 </div>
 
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+<div class="col-span-4">
+  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
 
 
  
 
 </div>
 </div>
-<button class="text-white block py-3 px-12  bg-red-600 rounded-lg text-md "  type="submit" > Submit </button>  
-
+<div class="col-span-4">
+<button class="text-white block py-1 w-full  bg-red-600 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
+</div>
 
 </div>
 </form>';
