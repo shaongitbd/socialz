@@ -2,15 +2,14 @@
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
 <?php session_start(); ?>
-<body>
-if($_SESSION["LoggedIn"]){
+<body><?php
+if(isset($_SESSION["LoggedIn"])){
 
 
 header("Location: home.php");
 
 }
-
-       <?php
+?>       <?php
        
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,34 +51,34 @@ header("Location: home.php");
        
 
 echo 
-'<div class=" flex justify-center items-center bg-gray-50">
+'<div class=" container flex justify-center items-center bg-gray-50">
   
-  <div class="bg-white grid grid-cols-6 gap-4  px-12 py-8 rounded-md">
+  <div class="bg-white grid grid-cols-3 gap-2  px-4 py-8 rounded-md">
    
-    <h1 class="text-gray-500 text-xl font-semibold"> Login </h1>
+    <h1 class="text-gray-500 text-md font-semibold"> Login </h1>
    
 
 
 
 <form action="login.php" method="post">
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
+<div class="col-span-full">
+  <div class="bg-white mb-2 justify-center border-gray-300 px-1 py-1 border border-gray-300 rounded-md">
+  <input class="block text-gray-900 text-sm  placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
  
 
 </div>
 </div>
 
-<div class="col-span-6">
-  <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-  <input class="block text-gray-900  placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+<div class="col-span-full">
+  <div class="bg-white justify-center border-gray-300 mb-2 px-1 py-1 border border-gray-300 rounded-md">
+  <input class="block text-gray-900  text-sm placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
 
 
  
 
 </div>
 </div>
-<button class="text-white block py-3 px-12  bg-red-600 rounded-lg text-md "  type="submit" > Submit </button>  
+<button class="text-white block py-1.5 px-16  bg-red-600 rounded-lg text-sm "  type="submit" > Submit </button>  
 </form>
 
 </div></div>';

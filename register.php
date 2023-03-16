@@ -1,15 +1,16 @@
 
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
-<?php require_once "auth_check.php"; ?>
-<body>
 
-if($_SESSION["LoggedIn"]){
+<body>
+<?php
+
+if(isset($_SESSION["LoggedIn"])){
 
 
 header("Location: home.php");
 
-}
+};?>
        <?php
        
     
@@ -57,17 +58,17 @@ echo
   
   <div class="bg-white grid grid-cols-6 gap-4  px-12 py-8 rounded-md">
    
-    <h1 class="text-gray-500 text-xl font-semibold"> Register </h1>
+    <h1 class="text-gray-500 text-xl col-span-6 font-semibold"> Register </h1>
     <?php echo $_SESSION["message"]?>
-    <div class="col-span-6"  >
-    <div class="bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300 rounded-md">
-    <input class="block text-gray-900  placeholder-gray-300" type="text" id="fname" name="fname" required placeholder="First Name"/>
+    <div class="col-span-3"  >
+    <div class="bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300 rounded-md">
+    <input class="block text-gray-900  text-sm placeholder-gray-300" type="text" id="fname" name="fname" required placeholder="First Name"/>
    
 
   </div>
 </div>
 
-<div class="col-span-6">
+<div class="col-span-3">
     <div class=" bg-white justify-center border-gray-300 px-2 py-3 border border-gray-300  rounded-md">
     <input class="block text-gray-900  placeholder-gray-300" type="text" id="lname" name="lname" required placeholder="Last  Name"/>
    
