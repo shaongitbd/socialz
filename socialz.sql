@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2023 at 08:02 PM
+-- Generation Time: Mar 18, 2023 at 07:58 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `socialz`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `conversion`
+--
+
+CREATE TABLE `conversion` (
+  `conversion_id` int(11) NOT NULL,
+  `friend_one` varchar(20) NOT NULL,
+  `firend_two` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `conversion`
+--
+
+INSERT INTO `conversion` (`conversion_id`, `friend_one`, `firend_two`) VALUES
+(1, '', ''),
+(2, '', ''),
+(3, '', '');
 
 -- --------------------------------------------------------
 
@@ -44,8 +65,19 @@ CREATE TABLE `message` (
   `from_friend` varchar(11) NOT NULL,
   `to_friend` varchar(11) NOT NULL,
   `msg_desc` text NOT NULL,
-  `msg_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `msg_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `conversion_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`message_id`, `from_friend`, `to_friend`, `msg_desc`, `msg_time`, `conversion_id`) VALUES
+(1, 'rabbi', 'siam', 'hi ', '2023-03-16 19:30:03', 1),
+(2, 'siam', 'rabbi', 'hello', '2023-03-16 19:30:03', 1),
+(3, 'rabbi', 'sakib', 'ki re ki koros', '2023-03-16 19:49:38', 2),
+(4, 'sakib', 'rabbi', 'gf ar ste kotha koi . toi ki koros', '2023-03-16 19:49:38', 2);
 
 -- --------------------------------------------------------
 
@@ -67,7 +99,8 @@ CREATE TABLE `status` (
 INSERT INTO `status` (`status_id`, `status_owner`, `status_content`, `status_date`) VALUES
 (3, 'agga', 'adad', '2023-03-15 18:27:45'),
 (4, 'agga', 'how are u doing ', '2023-03-15 18:28:07'),
-(5, 'agga', 'how are u doing ', '2023-03-15 18:28:47');
+(5, 'agga', 'how are u doing ', '2023-03-15 18:28:47'),
+(6, 'rabbi', 'hello it my first status', '2023-03-16 19:10:39');
 
 -- --------------------------------------------------------
 
@@ -118,6 +151,12 @@ INSERT INTO `user_info` (`username`, `first_name`, `last_name`, `gender`, `email
 --
 
 --
+-- Indexes for table `conversion`
+--
+ALTER TABLE `conversion`
+  ADD PRIMARY KEY (`conversion_id`);
+
+--
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
@@ -146,16 +185,22 @@ ALTER TABLE `user_info`
 --
 
 --
+-- AUTO_INCREMENT for table `conversion`
+--
+ALTER TABLE `conversion`
+  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `status_comments`
