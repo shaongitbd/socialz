@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2023 at 07:58 PM
+-- Generation Time: Mar 22, 2023 at 05:38 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -30,15 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `conversion` (
   `conversion_id` int(11) NOT NULL,
   `friend_one` varchar(20) NOT NULL,
-  `firend_two` varchar(20) NOT NULL
+  `friend_two` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `conversion`
 --
 
-INSERT INTO `conversion` (`conversion_id`, `friend_one`, `firend_two`) VALUES
-(1, '', ''),
+INSERT INTO `conversion` (`conversion_id`, `friend_one`, `friend_two`) VALUES
+(1, 'rabbi', 'shaongit'),
 (2, '', ''),
 (3, '', '');
 
