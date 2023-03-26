@@ -1,3 +1,4 @@
+
 <?php
 include_once 'db.php';
 session_start();
@@ -13,8 +14,11 @@ while($row = mysqli_fetch_array($result))
     $res_one = mysqli_query($conn, $sql);
     $msg=mysqli_fetch_array($res_one);
 
-    echo $msg["to_friend"];
+    echo $msg["to_friend"]. " ";
+    echo $msg["msg_time"];
+    echo $msg["msg_desc"];
 }
-echo mysqli_num_rows($result);
-echo $rows[0];
+//echo mysqli_num_rows($result);
+//echo $rows[0];
 ?>
+
