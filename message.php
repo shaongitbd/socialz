@@ -10,7 +10,7 @@ $rows = [];
 while($row = mysqli_fetch_array($result))
 {
     $id=$row["conversion_id"];
-    $sql = "SELECT to_friend,msg_time,msg_desc  FROM `message`  WHERE conversion_id=$id  ORDER BY msg_time LIMIT 1";
+    $sql = "SELECT to_friend,msg_time,msg_desc  FROM `message`  WHERE conversion_id=$id  ORDER BY msg_time DESC LIMIT 1";
     $res_one = mysqli_query($conn, $sql);
     $msg=mysqli_fetch_array($res_one);
 
