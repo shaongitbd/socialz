@@ -7,7 +7,6 @@
 
 <?php 
 
-
 if ($_SERVER["REQUEST_METHOD"]==="POST"){
 
 $username = $_SESSION["username"];
@@ -24,6 +23,15 @@ mysqli_query($conn, $sql);
 
 
 }
+$username = $_SESSION["username"];
+
+$own_status_sql = "SELECT * FROM `status` WHERE status_owner = '$username' ORDER BY status_date DESC LIMIT 1";
+$result = mysqli_query($conn, $own_status_sql);
+
+$own_status = mysqli_fetch_array($result);
+
+
+$friends_status_sql = "SELECT * FROM `status` WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
 
 
 echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="https://www.91-cdn.com/hub/wp-content/uploads/2019/02/Instagram-Featured.jpg" width="120px" height="100px" /></div> <div class="flex flex-row p-4 space-x-6"> <a class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
@@ -48,14 +56,17 @@ echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><di
 
 </form >
 
-<h1 class="mt-10 text-sm text-gray-600 font-semibold "> Recent posts from friends </h1>
+<h1 class="mt-10 text-sm text-gray-600 font-semibold "> Your last status </h1>
+
 
 <div class= "mt-10 border max-w-md p-4 ">
-<div class="mb-2 block  text-sm text-gray-600 font-semibold   "> $username </div>
+<div class="mb-2 block  text-sm text-gray-600 font-semibold   ">
+ <a href="/profile.php?username='.$own_status["status_owner"].'">'.$own_status["status_owner"].'</a></div>
 <p class="text-sm text-gray-500">
 
-The max-w-prose utility gives an element a max-width optimized for readability and adapts based on the font size.
+'.$own_status["status_content"].'
 <div class="flex mx-auto mt-4 "><a href=" " class="pr-4 text-xs text-gray-600 font-semibold">100 Likes</a><a class=" pr-4  text-xs text-gray-600 font-semibold ">41 comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+
 
 </p>
 
@@ -64,7 +75,24 @@ The max-w-prose utility gives an element a max-width optimized for readability a
 
 </div>
 
-'
 
 
+
+';
+
+echo '<h1 class="mt-10 text-sm text-gray-600 font-semibold "> Your friends status  </h1>
+
+
+<div class= "mt-10 border max-w-md p-4 ">
+<div class="mb-2 block  text-sm text-gray-600 font-semibold   ">
+ <a href="/profile.php?username='.$own_status["status_owner"].'">'.$own_status["status_owner"].'</a></div>
+<p class="text-sm text-gray-500">
+
+'.$own_status["status_content"].'
+<div class="flex mx-auto mt-4 "><a href=" " class="pr-4 text-xs text-gray-600 font-semibold">100 Likes</a><a class=" pr-4  text-xs text-gray-600 font-semibold ">41 comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+
+
+</p>
+
+<div>';
  ;?>
