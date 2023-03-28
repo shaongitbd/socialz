@@ -32,7 +32,7 @@ while($row = mysqli_fetch_array($result))
 
 </p>
 
-<div>
+
 
 
 </div>';

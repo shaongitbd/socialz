@@ -35,7 +35,7 @@ $friends_status_sql = "SELECT * FROM `status` WHERE status_owner IN ((SELECT to_
 $result2 = mysqli_query($conn, $friends_status_sql);
 
 
-echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="https://www.91-cdn.com/hub/wp-content/uploads/2019/02/Instagram-Featured.jpg" width="120px" height="100px" /></div> <div class="flex flex-row p-4 space-x-6"> <a class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
+echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="https://www.91-cdn.com/hub/wp-content/uploads/2019/02/Instagram-Featured.jpg" width="120px" height="100px" /></div> <div class="flex flex-row p-4 space-x-6"> <a class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a  href="conversion.php" class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
 
 <a class="block text-gray-700  py-2 text-sm font-semibold" href="friends.php"> Friends</a>
 
@@ -71,7 +71,6 @@ echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><di
 
 </p>
 
-<div>
 
 
 </div>
