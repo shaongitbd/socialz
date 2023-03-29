@@ -25,9 +25,29 @@ header("Location: home.php");
         $date_of_birth=$_POST["dof"];
         $address=$_POST["address"];
         $password=$_POST["password"];
+        if (isset($_FILES["profile_pic"])){
 
 
+          $status_image = $_FILES["profile_pic"]["name"];
+          
+          $file_ext = explode('.',$status_image); 
+          
+          $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+          $mime = getimagesize($_FILES["profile_pic"]["tmp_name"])['mime'];
+          
+          if(in_array($mime,$allowed_types)){
+          
+          $upload_dir=  "images/profile/".$file_ext[0].".".$file_ext[1];
+          move_uploaded_file($_FILES["profile_pic"]["tmp_name"],$upload_dir);
+
+          $sql = "INSERT INTO user_info VALUES('$username','$fname','$lname','$gender','$email','$phone_no','$date_of_birth','$address','$password','$upload_dir')";
+          
+          }
+          }
+
+        else{
         $sql = "INSERT INTO user_info VALUES('$username','$fname','$lname','$gender','$email','$phone_no','$date_of_birth','$address','$password')";
+        }
         
        try{
         if (mysqli_query($conn, $sql)) {
@@ -54,7 +74,7 @@ header("Location: home.php");
        
 
 echo 
-'<form action="register.php" method="post"><div class="flex justify-center items-center bg-gray-50">
+'<form action="register.php" method="post" enctype="multipart/form-data"><div class="flex justify-center items-center bg-gray-50">
   
   <div class="bg-white grid grid-cols-4 gap-4  px-12 py-8 rounded-md">
    
@@ -142,6 +162,7 @@ echo
 </div>
 </div>
 <div class="col-span-4">
+<input type="file" name="profile_pic">
 <button class="text-white block py-1 w-full  bg-red-600 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
 </div>
 
