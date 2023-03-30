@@ -60,19 +60,7 @@ $friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE stat
 $result2 = mysqli_query($conn, $friends_status_sql);
 
 
-echo '<div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="https://www.91-cdn.com/hub/wp-content/uploads/2019/02/Instagram-Featured.jpg" width="120px" height="100px" /></div> <div class="flex flex-row p-4 space-x-6"> <a class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a  href="conversion.php" class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
-
-<a class="block text-gray-700  py-2 text-sm font-semibold" href="friends.php"> Friends</a>
-
-<a class="block text-gray-700  py-2 text-sm  font-semibold" href="logout.php"> Logout</a>
-
-
-
-
-
-</div>
-
-</div>
+echo '
 
 <div class="container mx-auto px-6 mt-12  ">
 
@@ -123,7 +111,7 @@ while($row=mysqli_fetch_array($result2)){
  
 
 echo '
-<div class= "mt-10 px-2   border-2  border-solid border-slate-200	max-w-md shadow-sm">
+<div class= "mt-10 px-2  rounded-sm border-2  border-solid border-slate-200	max-w-md shadow-sm">
 <div class="mb-2 mt-6   block  text-sm text-gray-600 font-semibold   flex   justify-between ">
 <div class="flex items-center">
 <img class="rounded-full" src="'.$row["profile_pic"].'" height=60 width=60/> <a class="mx-4 text-sm "  href="/profile.php?username='.$row["status_owner"].'">'.$row["status_owner"].'</a></div>
