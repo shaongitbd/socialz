@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2023 at 08:04 PM
+-- Generation Time: Mar 30, 2023 at 02:26 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -33,6 +33,14 @@ CREATE TABLE `conversion` (
   `friend_two` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `conversion`
+--
+
+INSERT INTO `conversion` (`conversion_id`, `friend_one`, `friend_two`) VALUES
+(4, 'rabbi', 'begumRokeya'),
+(5, 'rabbi', 'sakib');
+
 -- --------------------------------------------------------
 
 --
@@ -51,9 +59,12 @@ CREATE TABLE `friends` (
 
 INSERT INTO `friends` (`from_friend`, `to_friend`, `added_date`) VALUES
 ('rabbi', 'begumRokeya', '2023-03-29 17:41:07'),
-('rabbi', 'rohan', '2023-03-29 15:54:31'),
+('rabbi', 'sakib', '2023-03-29 15:54:31'),
 ('rabbi', 'shaongit', '2023-03-29 17:39:53'),
-('rabbit', 'begumRokeya', '2023-03-29 17:40:59');
+('rabbit', 'begumRokeya', '2023-03-29 17:40:59'),
+('shaongit', 'begumRokeya', '2023-03-29 22:49:41'),
+('shaongit', 'rabbi', '2023-03-29 22:49:30'),
+('shaongit', 'sakib', '2023-03-29 22:49:50');
 
 -- --------------------------------------------------------
 
@@ -82,6 +93,17 @@ CREATE TABLE `message` (
   `msg_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `conversion_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`message_id`, `from_friend`, `to_friend`, `msg_desc`, `msg_time`, `conversion_id`) VALUES
+(7, 'rabbi', 'begumRokeya', 'Hello grandma.... ', '2023-03-29 19:20:32', 4),
+(9, 'begumRokeya', 'rabbi', 'How are u my son?', '2023-03-29 20:14:18', 4),
+(17, 'rabbi', 'sakib', 'kya hal', '2023-03-29 21:34:00', 5),
+(19, 'rabbi', 'begumRokeya', 'u still alive? O_o', '2023-03-30 00:12:55', 4),
+(21, 'begumRokeya', 'rabbi', 'Why you think a woman should die faster than man?\r\nLet me write you one of my quote\r\n\' \'A lion is stronger than a man, but it does not enable him to dominate the human race. You have neglected the duty you owe to yourselves, and you have lost your natural rights by shutting your eyes to your own interests.', '2023-03-30 00:14:58', 4);
 
 -- --------------------------------------------------------
 
@@ -126,7 +148,7 @@ INSERT INTO `status` (`status_id`, `status_owner`, `status_content`, `status_dat
 (13, 'rabbi', 'adadad', '2023-03-29 14:36:47', 'images/status/okpng'),
 (14, 'rabbi', 'adad', '2023-03-29 14:37:29', 'images/status/pic.PNG'),
 (15, 'rabbi', 'How are u doing  right now?', '2023-03-29 15:36:55', 'images/status/pic.PNG'),
-(16, 'rohan', 'Thank you everyone', '2023-03-29 15:55:18', 'images/status/gray.jpg'),
+(16, 'sakib', 'Thank you everyone', '2023-03-29 15:55:18', 'images/status/gray.jpg'),
 (17, 'begumRokeya', 'Chinso amay babaura?', '2023-03-29 17:41:40', 'images/status/Begum-Rokeya.jpg');
 
 -- --------------------------------------------------------
@@ -172,7 +194,7 @@ INSERT INTO `user_info` (`username`, `first_name`, `last_name`, `gender`, `email
 ('gftygf', 'fhgv', 'jhvgcfg', 'Male', 'rahelrabbihasan@gmail.com', 1518652714, '2000-12-03', 'forikabadh', '1234567', ''),
 ('rabbi', 'rabbi', 'hasan', 'Male', 'rahelrabbihasan@gmail.com', 1518652714, '2001-03-15', 'forikabadh', '123456', 'images/profile/rabbi.jpg'),
 ('rabbit', 'hgfg', 'kjbjb', 'Male', 'hghv@gmail.com', 1518652714, '2005-12-12', 'forikabadh', '12345678', ''),
-('rohan', 'rohan', 'ahmed', 'Male', 'rahelrabbihasan@gmail.com', 1518652714, '2003-05-06', 'forikabadh', '12345678', 'images/status/pic.PNG'),
+('sakib', 'sakib', 'ahmed', 'Male', 'sakib_khan@gmail.com', 1518652714, '2003-05-06', 'forikabadh', '12345678', 'images/profile/sakib.jpg'),
 ('shaongit', 'MD', 'Sha', 'Male', 'shaongit@gmail.com', 18343212, '2000-07-11', 'Dhaka', '12345', '');
 
 --
@@ -247,7 +269,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `conversion`
 --
 ALTER TABLE `conversion`
-  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -259,7 +281,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `status`
