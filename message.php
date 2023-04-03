@@ -10,7 +10,7 @@ $conversion_id  = $_GET["id"];
 $msg_sql= "SELECT first_name,last_name, profile_pic, to_friend, msg_desc,msg_time,from_friend  FROM `message`  LEFT JOIN `user_info`  ON   message.from_friend=user_info.username  WHERE conversion_id='$conversion_id' ";
 $result = mysqli_query($conn, $msg_sql);
 
-
+if()
 
 while($row = mysqli_fetch_array($result))
 {
@@ -42,6 +42,9 @@ echo'<div class="max-w-md p-6"><form  action="home.php" method="POST" enctype="m
 <button type="submit" class="ml-1 block px-6 py-2 rounded-md bg-red-700 text-white text-sm font-semibold w-md">Post</button>
 
 </form></div>';
+
+
+
 
 ?>
 
