@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 02:26 AM
+-- Generation Time: Apr 04, 2023 at 09:18 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `socialz`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_likes`
+--
+
+CREATE TABLE `comment_likes` (
+  `comment_like_id` int(11) NOT NULL,
+  `liked_by` varchar(255) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -58,26 +71,8 @@ CREATE TABLE `friends` (
 --
 
 INSERT INTO `friends` (`from_friend`, `to_friend`, `added_date`) VALUES
-('rabbi', 'begumRokeya', '2023-03-29 17:41:07'),
-('rabbi', 'sakib', '2023-03-29 15:54:31'),
-('rabbi', 'shaongit', '2023-03-29 17:39:53'),
-('rabbit', 'begumRokeya', '2023-03-29 17:40:59'),
-('shaongit', 'begumRokeya', '2023-03-29 22:49:41'),
-('shaongit', 'rabbi', '2023-03-29 22:49:30'),
-('shaongit', 'sakib', '2023-03-29 22:49:50');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `likes`
---
-
-CREATE TABLE `likes` (
-  `likes_id` int(11) NOT NULL,
-  `liked_by` varchar(255) NOT NULL,
-  `status_id` int(11) NOT NULL,
-  `Time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+('rabbi', 'sakib', '2023-04-04 07:59:27'),
+('sakib', 'rabbi', '2023-04-04 07:59:27');
 
 -- --------------------------------------------------------
 
@@ -103,7 +98,11 @@ INSERT INTO `message` (`message_id`, `from_friend`, `to_friend`, `msg_desc`, `ms
 (9, 'begumRokeya', 'rabbi', 'How are u my son?', '2023-03-29 20:14:18', 4),
 (17, 'rabbi', 'sakib', 'kya hal', '2023-03-29 21:34:00', 5),
 (19, 'rabbi', 'begumRokeya', 'u still alive? O_o', '2023-03-30 00:12:55', 4),
-(21, 'begumRokeya', 'rabbi', 'Why you think a woman should die faster than man?\r\nLet me write you one of my quote\r\n\' \'A lion is stronger than a man, but it does not enable him to dominate the human race. You have neglected the duty you owe to yourselves, and you have lost your natural rights by shutting your eyes to your own interests.', '2023-03-30 00:14:58', 4);
+(21, 'begumRokeya', 'rabbi', '\r\n\' \'A lion is stronger than a man, but it does not enable him to dominate the human race. You have neglected the duty you owe to yourselves, and you have lost your natural rights by shutting your eyes to your own interests.', '2023-04-04 02:48:40', 4),
+(28, 'rabbi', 'begumRokeya', 'What is your point?', '2023-04-03 23:49:17', 4),
+(34, 'rabbi', 'sakib', 'a', '2023-04-04 02:47:00', 5),
+(35, 'rabbi', 'sakib', 'Ki koros?', '2023-04-04 02:47:49', 5),
+(36, 'rabbi', 'sakib', 'kire ?', '2023-04-04 07:57:43', 5);
 
 -- --------------------------------------------------------
 
@@ -161,8 +160,35 @@ CREATE TABLE `status_comments` (
   `status_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
   `comment_owner` varchar(11) NOT NULL,
-  `comment_desc` int(11) NOT NULL
+  `comment_desc` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `status_comments`
+--
+
+INSERT INTO `status_comments` (`status_id`, `comment_id`, `comment_owner`, `comment_desc`) VALUES
+(17, 1, 'sakib', 'wow');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_likes`
+--
+
+CREATE TABLE `status_likes` (
+  `likes_id` int(11) NOT NULL,
+  `liked_by` varchar(255) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `Time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `status_likes`
+--
+
+INSERT INTO `status_likes` (`likes_id`, `liked_by`, `status_id`, `Time`) VALUES
+(1, 'sakib', 15, '2023-04-04 08:49:54');
 
 -- --------------------------------------------------------
 
@@ -202,6 +228,14 @@ INSERT INTO `user_info` (`username`, `first_name`, `last_name`, `gender`, `email
 --
 
 --
+-- Indexes for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  ADD PRIMARY KEY (`comment_like_id`),
+  ADD KEY `comment_id` (`comment_id`),
+  ADD KEY `liked_by` (`liked_by`);
+
+--
 -- Indexes for table `conversion`
 --
 ALTER TABLE `conversion`
@@ -215,14 +249,6 @@ ALTER TABLE `conversion`
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`from_friend`,`to_friend`),
   ADD KEY `to_friend` (`to_friend`);
-
---
--- Indexes for table `likes`
---
-ALTER TABLE `likes`
-  ADD PRIMARY KEY (`likes_id`),
-  ADD KEY `liked_by` (`liked_by`),
-  ADD KEY `status_id` (`status_id`);
 
 --
 -- Indexes for table `message`
@@ -256,6 +282,14 @@ ALTER TABLE `status_comments`
   ADD KEY `status_id` (`status_id`);
 
 --
+-- Indexes for table `status_likes`
+--
+ALTER TABLE `status_likes`
+  ADD PRIMARY KEY (`likes_id`),
+  ADD KEY `liked_by` (`liked_by`),
+  ADD KEY `status_id` (`status_id`);
+
+--
 -- Indexes for table `user_info`
 --
 ALTER TABLE `user_info`
@@ -266,38 +300,51 @@ ALTER TABLE `user_info`
 --
 
 --
+-- AUTO_INCREMENT for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  MODIFY `comment_like_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `conversion`
 --
 ALTER TABLE `conversion`
-  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `likes`
---
-ALTER TABLE `likes`
-  MODIFY `likes_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `status_comments`
 --
 ALTER TABLE `status_comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `status_likes`
+--
+ALTER TABLE `status_likes`
+  MODIFY `likes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  ADD CONSTRAINT `comment_likes_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `status_comments` (`comment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_likes_ibfk_2` FOREIGN KEY (`liked_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `conversion`
@@ -312,13 +359,6 @@ ALTER TABLE `conversion`
 ALTER TABLE `friends`
   ADD CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`from_friend`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`to_friend`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `likes`
---
-ALTER TABLE `likes`
-  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`liked_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `message`
@@ -348,6 +388,13 @@ ALTER TABLE `status_comments`
   ADD CONSTRAINT `status_comments_ibfk_1` FOREIGN KEY (`comment_owner`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `status_comments_ibfk_2` FOREIGN KEY (`comment_owner`) REFERENCES `user_info` (`username`),
   ADD CONSTRAINT `status_comments_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `status_likes`
+--
+ALTER TABLE `status_likes`
+  ADD CONSTRAINT `status_likes_ibfk_1` FOREIGN KEY (`liked_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `status_likes_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

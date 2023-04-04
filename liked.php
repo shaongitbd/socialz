@@ -44,8 +44,8 @@ echo'
  if(mysqli_num_rows($friend_check_res) != 0){}
 
  else{
-    echo mysqli_num_rows($friend_check_res);
- echo'<a  href="friends.php?add='.$likers["username"].'" class="mt-4 text-sm px-2 py-1.5 bg-red-800 text-semibold text-white rounded-md "> Add Friend</a>';
+ 
+ echo'<div class="mt-2"><a  href="friends.php?add='.$likers["username"].'" class="mt-4 text-sm px-2 py-1.5 bg-red-800 text-semibold text-white rounded-md "> Add Friend</a></div>';
 
 }
  
