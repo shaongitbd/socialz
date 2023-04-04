@@ -88,7 +88,7 @@ echo'
 
 
 
-$status = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = status_id)'total_comments',(SELECT COUNT(*) from `likes` WHERE status_id = status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username='$id')'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` WHERE status_owner = '$id' and status_image !=''  ORDER BY status_date DESC LIMIT 9";
+$status = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = status_id)'total_comments',(SELECT  `profile_pic` from `user_info` WHERE username='$id')'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` WHERE status_owner = '$id' and status_image !=''  ORDER BY status_date DESC LIMIT 9";
 $status_q =mysqli_query($conn, $status);
 
 while($status = mysqli_fetch_array($status_q))

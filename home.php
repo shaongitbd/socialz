@@ -50,13 +50,13 @@ mysqli_query($conn, $sql);
 }
 $username = $_SESSION["username"];
 
-$own_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = status_id)'total_comments',(SELECT COUNT(*) from `likes` WHERE status_id = status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username='$username')'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` WHERE status_owner = '$username' ORDER BY status_date DESC LIMIT 1";
+$own_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT  `profile_pic` from `user_info` WHERE username='$username')'profile_pic',status_id,status_owner,status_content,status_image,(SELECT COUNT(*) from `status_likes` WHERE temp.status_id = status_id)'total_likes', TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp  WHERE status_owner = '$username' ORDER BY status_date DESC LIMIT 1";
 $result = mysqli_query($conn, $own_status_sql);
 
 $own_status = mysqli_fetch_array($result);
 
 
-$friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = status_id)'total_comments',(SELECT COUNT(*) from `likes` WHERE status_id = status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username=status_owner)'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
+$friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT COUNT(*) from `status_likes` WHERE status_id = temp.status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username=temp.status_owner)'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
 $result2 = mysqli_query($conn, $friends_status_sql);
 
 
@@ -93,7 +93,7 @@ echo '
 <br/>
 
 <img src="'.$own_status["status_image"].'"  width=600 height=400 />
-<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/status?id="'.$own_status["status_id"].'/?showlikes" class="pr-4 text-xs text-gray-600 font-semibold">'.$own_status["total_likes"].' Likes</a><a href="/status?id="'.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/liked.php?id='.$own_status["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$own_status["total_likes"].' Likes</a><a href="/status?id="'.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
 
 
 
@@ -130,7 +130,7 @@ echo '
 <br/>
 
 <img src="'.$row["status_image"].'"  width=600 height=400 />
-<div class="flex mx-auto mt-4 "><a href=" " class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status?id="'.$row["status_id"].'"  class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+<div class="flex mx-auto mt-4 "><a href="/liked.php?id='.$row["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status?id="'.$row["status_id"].'"  class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
 
 
 
