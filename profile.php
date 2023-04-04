@@ -19,21 +19,22 @@
 
      <div class="img"><img class="rounded-full" src="'.$profile_result["profile_pic"].'" height=70 width=70/></div>
      <div class="flex flex-col">
-     <h2 class="font-semibold text-xl text-gray-700">Rabbi Hasan</h2>
-     <p class="font-semibold text-md text-gray-500">Dhaka, Bangladesh</p>
+     <h2 class="font-semibold text-xl text-gray-700">'.$profile_result["first_name"].' '.$profile_result["last_name"].'</h2>
+     <p class="font-semibold text-md text-gray-500">'.$profile_result["address"].'</p>
      </div>';
 
   $friend_check = "SELECT * FROM `friends` where from_friend='$username' and to_friend = '$id' ";
   $friend_check_res = mysqli_query($conn, $friend_check);
+ 
 
   if(mysqli_num_rows($friend_check_res) != 0){
 
-    echo '<div><a href="friends.php?remove='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Remove</p></div>';
+    echo '<div><a href="friends.php?remove='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Remove</a></div>';
 
     }
     else{
 
-   '<div><a href="friends.php?add='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Add Friend</a></div>';
+  echo '<div><a href="friends.php?add='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Add Friend</a></div>';
 
     }
 echo'
