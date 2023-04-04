@@ -30,7 +30,8 @@
 
   if(mysqli_num_rows($friend_check_res) != 0){
 
-    echo '<div><a href="friends.php?remove='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Remove</a></div>';
+    echo '<div><a href="friends.php?remove='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Remove</a></div>
+    <div><a href="new_conversion.php?username='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Message</a></div>';
 
     }
     else{

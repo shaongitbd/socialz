@@ -26,7 +26,7 @@ else{
 
 if(isset($_POST["msg_desc"])){
     $msg_desc = $_POST["msg_desc"];
-    echo 'ww';
+
 
     $insert_msg_sql = "insert into  `message`(from_friend, to_friend,msg_desc,msg_time,conversion_id) VALUES ('$username', '$friend','$msg_desc',current_timestamp(),$conversion_id)"; 
     $res_msg_insert = mysqli_query($conn, $insert_msg_sql);
@@ -64,9 +64,9 @@ while($row = mysqli_fetch_array($result))
 
 
 echo'<div class="max-w-md p-6"><form  action="message.php?id='.$conversion_id.'" method="POST" enctype="multipart/form-data">
-<textarea name="msg_desc" type="text" id="status_desc" rows="4" class="block  border border-b px-4 py-3 rounded-md mb-2  w-full" placeholder="Write your thoughts here.... "></textarea>
+<textarea name="msg_desc" type="text" id="status_desc" rows="4" class="block  border border-b px-4 py-3 rounded-md mb-2  w-full" placeholder="your messsage.... "></textarea>
 <input class="text-sm font-semibold  py-2" type="file" name="msg_image">
-<button type="submit" class="ml-1 block px-6 py-2 rounded-md bg-red-700 text-white text-sm font-semibold w-md">Post</button>
+<button type="submit" class="ml-1 block px-6 py-2 rounded-md bg-red-700 text-white text-sm font-semibold w-md">Send</button>
 
 </form></div>';
 
