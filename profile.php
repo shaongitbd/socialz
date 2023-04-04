@@ -3,7 +3,7 @@
 <?php require_once "db.php"; ?>
 <?php session_start(); ?>
 
-?>     
+
 
 
   <?php
@@ -48,11 +48,11 @@ echo'
 
 $friends_list = "SELECT first_name, last_name,profile_pic,username ,to_friend,added_date FROM `friends` INNER JOIN `user_info` ON friends.to_friend=user_info.username WHERE from_friend='$id' LIMIT 6";
 $friends_list_res = mysqli_query($conn, $friends_list);
+$total_friends =  mysqli_num_rows($friends_list_res);
 
-
-echo'<div class=" text-lg text-gray-500 ">100 Friends</div>
-<div  class="text-lg text-gray-500 ">15k Following</div>
-<div class="text-lg text-gray-500 "> 15k Following</div>
+echo'<div class=" text-lg text-gray-500 ">'.$total_friends.' Friends</div>
+<div  class="text-lg text-gray-500 ">.. Following</div>
+<div class="text-lg text-gray-500 "> .. Following</div>
 
 </div>
 
@@ -83,12 +83,14 @@ echo'
 
 
 
+$status = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = status_id)'total_comments',(SELECT COUNT(*) from `likes` WHERE status_id = status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username='$id')'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` WHERE status_owner = '$id' and status_image !=''  ORDER BY status_date DESC LIMIT 9";
+$status_q =mysqli_query($conn, $status);
 
-while($status = mysqli_fetch_array($status_list))
+while($status = mysqli_fetch_array($status_q))
 {
 
 echo'
-<img  src="images/profile/rabbi.jpg" height=100 width=100/>
+<a href="status.php?id='.$status["status_id"].'"><img src="'.$status["status_image"].'" height=100 width=100/></a>;
 ';
 
 
