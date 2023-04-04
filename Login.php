@@ -1,7 +1,6 @@
 
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
-<?php session_start(); ?>
 <body><?php
 if(isset($_SESSION["LoggedIn"])){
 

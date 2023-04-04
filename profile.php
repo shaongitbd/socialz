@@ -1,7 +1,7 @@
 
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
-<?php session_start(); ?>
+
 
 
 
@@ -22,6 +22,7 @@
      <h2 class="font-semibold text-xl text-gray-700">'.$profile_result["first_name"].' '.$profile_result["last_name"].'</h2>
      <p class="font-semibold text-md text-gray-500">'.$profile_result["address"].'</p>
      </div>';
+  if($id!=$username){
 
   $friend_check = "SELECT * FROM `friends` where from_friend='$username' and to_friend = '$id' ";
   $friend_check_res = mysqli_query($conn, $friend_check);
@@ -37,6 +38,8 @@
   echo '<div><a href="friends.php?add='.$id.'" class="mt-2 mx-2  text-sm px-3 py-2 bg-red-800 text-semibold text-white rounded-md">Add Friend</a></div>';
 
     }
+
+  }
 echo'
 </div>
 
