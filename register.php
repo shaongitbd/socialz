@@ -74,26 +74,27 @@ header("Location: home.php");
        
 
 echo 
-'<form action="register.php" method="post" enctype="multipart/form-data"><div class="flex justify-center items-center bg-gray-50">
+
+'
+
+<div class="h-screen flex justify-center items-center  bg-gray-50"><form action="register.php" method="post" enctype="multipart/form-data"><div class="flex  items-center bg-gray-50">
   
-  <div class="bg-white grid grid-cols-4 gap-4  px-12 py-8 rounded-md">
+  <div class="bg-white grid grid-cols-4 gap-4 py-8 rounded-md">
    
-    <h1 class="text-gray-500 text-xl col-span-6 font-semibold"> Register </h1>
+    <h1 class="text-gray-500 text-xl col-span-6 font-semibold"> Register   </h1>
     <?php echo $_SESSION["message"]?>
     <div class="col-span-2"  >
-    <div class="bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300 rounded-md">
-    <input class="block text-gray-900  text-sm placeholder-gray-300" type="text" id="fname" name="fname" required placeholder="First Name"/>
+    <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="fname" name="fname" required placeholder="First Name" />
    
 
-  </div>
+ 
 </div>
 
 <div class="col-span-2">
-    <div class=" bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300  rounded-md">
-    <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="lname" name="lname" required placeholder="Last  Name"/>
+    <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="lname" name="lname" required placeholder="Last  Name" />
    
 
-  </div>
+
 
 
   
@@ -101,73 +102,75 @@ echo
 
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5 border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="email" name="email" required placeholder="Email"/>
+
+  <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="email" name="email" required placeholder="Email" />
  
 
-</div>
+
 </div>
 
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="phone_no" name="phone_no" required  placeholder="Phone number"/>
+ 
+  <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="phone_no" name="phone_no" required  placeholder="Phone number" />
  
 
-</div>
+
 </div>
 
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="date" id="dof" name="dof" required placeholder="Date of bith"/>
+
+  <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="date" id="dof" name="dof" required placeholder="Date of bith" />
  
 
-</div>
+
 </div>
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="address" name="address" required placeholder="Address"/>
+
+  <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="address" name="address" required placeholder="Address" />
  
 
-</div>
+
 </div>
 
 <div class="col-span-4">
-    <div class=" bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300  rounded-md">
-    <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="gender" name="gender" required placeholder="Gender"/>
+
+    <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="gender" name="gender" required placeholder="Gender" />
    
 
-  </div>
+
 
 
 </div>
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
+
+  <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="username" name="username" required placeholder="Username" />
  
 
-</div>
+
 </div>
 
 <div class="col-span-4">
-  <div class="bg-white justify-center border-gray-300 px-2 py-1.5  border border-gray-300 rounded-md">
-  <input class="block text-gray-900 text-sm placeholder-gray-300" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+  
+  <input class="bbg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="password" id="password" name="password" autocomplete="off" required placeholder="Password" />
 
 
  
 
-</div>
+
 </div>
 <div class="col-span-4">
-<input type="file" name="profile_pic">
-<button class="text-white block py-1 w-full  bg-red-600 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
+<input class="text-sm" type="file" name="profile_pic">
+<button class="mt-4 text-white block px-6 py-2.5  w-full  bg-gray-700 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
 </div>
 
 </div>
-</form>';
+</form>
+</div>
+';
 
        }
 

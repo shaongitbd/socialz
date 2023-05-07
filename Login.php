@@ -50,33 +50,38 @@ header("Location: home.php");
        
 
 echo 
-'<div class="h-screen flex justify-center items-center  bg-gray-50">
+'<div class="h-screen flex justify-center items-center  bg-gray-50  ">
 
-  <div class="bg-white    gap-2 px-8 py-6 rounded-md w-1/4">
+  <div class="bg-white    gap-2 px-8 py-6 rounded-md w-1/5  ">
      <div class="col-span-2 mb-8">
-    <h1 class="text-gray-500 text-md font-semibold"> Login </h1>
+    <h1 class="text-gray-700 text-xl font-semibold text-center	"> Login </h1>
+    <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
+
    </div>
 
 
-
 <form action="login.php" method="post">
-<div class="mb-2">
+<div class="col-span-2">
+<label class="mx-1 text-md text-gray-500 font-semibold">Username</label>
  
-  <input class="w-full block text-gray-900 text-sm px-1 py-1.5 border border-gray-300 rounded-md" placeholder-gray-300" type="text" id="username" name="username" required placeholder="Username"/>
- 
-
-</div>
-
-<div class="mb-2">
-
-  <input class="w-full block  text-gray-900  text-sm  bg-white border-gray-300 mb-2 px-1 py-1.5 border border-gray-300 rounded-md" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
-
-
+  <input class="mt-2 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-2" type="text" id="username" name="username" required placeholder="Username"/>
  
 
 </div>
-<button class="mt-6 text-white block py-1 w-full  bg-red-600 rounded-lg text-sm font-semibold "  type="submit" > Submit </button>  
+
+<div class="mt-4 col-span-2">
+<label class="mx-1 text-md text-gray-500 font-semibold">Password</label>
+  <input class="mt-2 bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-2" type="password" id="password" name="password" autocomplete="off" required placeholder="Password"/>
+
+
+ 
+
+</div>
+<button class="mt-4 text-white block px-6 py-2.5  w-full  bg-gray-700 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
+
+<div class="mt-4 flex justify-center"><p class=" text-sm text-gray-500 font-normal"  > Dont have an account? </p> <a class="mx-2 text-sm text-gray-600 font-semibold" href="/register.php">Register here</a></div> 
 </form>
+</div>
 
 </div></div>';
 
