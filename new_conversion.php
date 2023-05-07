@@ -11,6 +11,7 @@
   <?php
    $username = $_SESSION["username"];
    $id  = $_GET["username"];
+   echo $id;
    
     if(isset($_POST["msg_desc"])){
     $msg_desc = $_POST["msg_desc"];
@@ -31,7 +32,7 @@
 }
    $exiting_conversion_check = "SELECT conversion_id from `conversion` where (friend_one='$username' and friend_two = '$id') or (friend_one='$id' and friend_two = '$username') ";
    $exiting_conversion_check_q =mysqli_query($conn,$exiting_conversion_check);
-
+   
    if(mysqli_num_rows($exiting_conversion_check_q)!=0){
       $conversion_sql_res =mysqli_fetch_array($exiting_conversion_check_q);
       $conversion_id=$conversion_sql_res["conversion_id"];
@@ -39,6 +40,8 @@
        
 
    }
+
+  
 
    $sql = "SELECT first_name, last_name,profile_pic,email, address,date_of_birth,phone_no FROM `user_info` WHERE username =  '$id ' "; 
    $sql_q = mysqli_query($conn,$sql);
@@ -54,7 +57,7 @@
  </div>
  </div>
 
-<div class="max-w-md p-6"><form  action="new_conversion.php?username='.$username.'" method="POST" enctype="multipart/form-data">
+<div class="max-w-md p-6"><form  action="new_conversion.php?username='.$id.'" method="POST" enctype="multipart/form-data">
 <textarea name="msg_desc" type="text" id="msg_desc" rows="4" class="block  border border-b px-4 py-3 rounded-md mb-2  w-full" placeholder="your message .... "></textarea>
 
 <button type="submit" class="ml-1 block px-6 py-2 rounded-md bg-red-700 text-white text-sm font-semibold w-md">Send</button>

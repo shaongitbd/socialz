@@ -129,6 +129,7 @@ echo'
 <div class="mt-2 flex space-x-1 "> ';
 
 
+$status_q =mysqli_query($conn, $status);
 
 while($status = mysqli_fetch_array($status_q))
 {

@@ -12,6 +12,9 @@ $result = mysqli_query($conn, $msg_sql);
 
 $res_arr = mysqli_fetch_array($result);
 
+
+
+
 if($res_arr["to_friend"]==$username){
 
     $friend = $res_arr["from_friend"];
@@ -34,13 +37,16 @@ if(isset($_POST["msg_desc"])){
     $msg_sql= "SELECT first_name,last_name, profile_pic, to_friend, msg_desc,msg_time,from_friend  FROM `message`  LEFT JOIN `user_info`  ON   message.from_friend=user_info.username  WHERE conversion_id='$conversion_id' ";
     $result = mysqli_query($conn, $msg_sql);
 
-    $res_arr = mysqli_fetch_array($result);
+    
 
 }
+
+$result = mysqli_query($conn, $msg_sql);
 
 
 while($row = mysqli_fetch_array($result))
 {
+
 
     echo'
 
@@ -60,6 +66,8 @@ while($row = mysqli_fetch_array($result))
 
 
 </div>';
+
+
 }
 
 
