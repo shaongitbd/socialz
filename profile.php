@@ -23,7 +23,7 @@
     
    echo'
    <div class="mx-6  max-w-lg ">
-   <div class="bg-blue-400  "><img src="https://arielle.com.au/wp-content/uploads/2016/04/together-we-travel-dark.jpg" width=600 height=500 /></div>
+   <div class="bg-blue-400  "><img  " src="https://arielle.com.au/wp-content/uploads/2016/04/together-we-travel-dark.jpg" width=800 height=500 /></div>
    <div class="flex relative   pt-20  -mt-40 z-1 justify-center "><img class="rounded-full" src="'.$profile_result["profile_pic"].'" height=110 width=110/>
    
    
@@ -81,14 +81,31 @@ $friends_list = "SELECT first_name, last_name,profile_pic,username ,to_friend,ad
 $friends_list_res = mysqli_query($conn, $friends_list);
 $total_friends =  mysqli_num_rows($friends_list_res);
 
-echo'<div class="flex space-x-4  "> <div class="flex flex-col justify-center"><div class="text-xl text-gray-500 font-bold  ">'.$total_friends.'</div><div class=" text-md text-gray-600 font-normal "> Friends</div></div>
-<div class="flex flex-col"><div class="text-xl text-gray-500 font-bold">'.$total_friends.'</div><div class=" text-md text-gray-600 font-normal "> Following</div></div>
-<div class="flex flex-col"><div class="text-xl text-gray-500 font-bold">'.$status_res["total_posts"].'</div><div class=" text-md text-gray-600 font-normal "> Total Post</div></div>
+echo'<div class="flex space-x-4  "> <div class="flex flex-col justify-center"><div class="text-xl text-gray-500 font-bold text-center ">'.$total_friends.'</div><div class=" text-md text-gray-600 font-normal "> Friends</div></div>
+<div class="flex flex-col"><div class="text-xl text-gray-500 text-center font-bold">'.$total_friends.'</div><div class=" text-md text-gray-600 font-normal "> Following</div></div>';
+
+if (mysqli_num_rows($status_q) != 0){
+echo'
+<div class="flex flex-col"><div class="text-xl text-gray-500 text-center font-bold">'.$status_res["total_posts"].'</div><div class=" text-md text-gray-600 font-normal "> Total Post</div></div>
 </div></div>
 
 <div class="mt-14 mb-3 flex justify-between"><div class=""><p  class="text-md font-semibold text-gray-700">Friends </p></div><div class=""><a class="text-sm font-semibold text-gray-700" href="friends.php">view all </a></div></div>
 <div class="mt-2 flex space-x-3"> 
-';
+';}
+
+else{
+  echo'
+  <div class="flex flex-col"><div class="text-xl text-gray-500 text-center font-bold">0</div><div class=" text-md text-gray-600 font-normal "> Total Post</div></div>
+  </div></div>
+  
+  <div class="mt-14 mb-3 flex justify-between"><div class=""><p  class="text-md font-semibold text-gray-700">Friends </p></div><div class=""><a class="text-sm font-semibold text-gray-700" href="friends.php">view all </a></div></div>
+  <div class="mt-2 flex space-x-3"> 
+  ';
+
+
+}
+
+
 while($friends = mysqli_fetch_array($friends_list_res))
 {
   echo'

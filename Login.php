@@ -50,10 +50,10 @@ header("Location: home.php");
        
 
 echo 
-'<div class="h-screen flex justify-center items-center  bg-gray-50  ">
+'<div class=" h-screen flex justify-center items-center  bg-gray-50   "  style="background-image: url(images/bg.jpg);">
 
-  <div class="bg-white    gap-2 px-8 py-6 rounded-md w-1/5  ">
-     <div class="col-span-2 mb-8">
+  <div class="border border-gray-300 bg-white   gap-2 px-8 py-6 rounded-md w-1/5 shadow-md ">
+     <div class="mt-4 col-span-2 mb-10">
     <h1 class="text-gray-700 text-xl font-semibold text-center	"> Login </h1>
     <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
 
@@ -79,7 +79,7 @@ echo
 </div>
 <button class="mt-4 text-white block px-6 py-2.5  w-full  bg-gray-700 rounded-lg text-sm font-semibold"  type="submit" > Submit </button>  
 
-<div class="mt-4 flex justify-center"><p class=" text-sm text-gray-500 font-normal"  > Dont have an account? </p> <a class="mx-2 text-sm text-gray-600 font-semibold" href="/register.php">Register here</a></div> 
+<div class="mt-4 mb-6 flex justify-center"><p class=" text-sm text-gray-500 font-normal"  > Dont have an account? </p> <a class="mx-2 text-sm text-gray-600 font-semibold" href="/register.php">Register here</a></div> 
 </form>
 </div>
 

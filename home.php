@@ -59,9 +59,7 @@ $own_status = mysqli_fetch_array($result);
 $friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT COUNT(*) from `status_likes` WHERE status_id = temp.status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username=temp.status_owner)'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
 $result2 = mysqli_query($conn, $friends_status_sql);
 
-
-echo '
-
+echo'
 <div class="container mx-auto px-6 mt-12  ">
 
 <form action="home.php" method="POST"  enctype="multipart/form-data">
@@ -70,6 +68,12 @@ echo '
 <button type="submit" class="mt-2 ml-1 block px-8 py-2 rounded-md bg-gray-800 text-white text-md font-semibold">Post</button>
 
 </form >
+';
+if(mysqli_num_rows($result) != 0){
+
+echo '
+
+
 
 <h1 class="mt-10 text-sm text-gray-600 font-semibold "> Your last status </h1>
 
@@ -99,7 +103,11 @@ echo'<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/liked.php?id='.$own_sta
 
 
 
-</div>
+</div>';
+
+}
+
+echo'
 
 <h1 class="mt-10 text-sm text-gray-600 font-semibold "> Your friends status  </h1>
 

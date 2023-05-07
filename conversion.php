@@ -37,7 +37,7 @@ while($row = mysqli_fetch_array($result))
 
    
 
-<div class= "flex max-w-md p-4 max-w-xl  pb-8">
+<div class= "flex max-w-md px-4 max-w-xl  pb-6">
 
 <div><img class="rounded-full" src="'.$msg["profile_pic"].'"   width=80 height=80/></div>
 <div class="mx-4 flex flex-col space-y-3  w-full ">

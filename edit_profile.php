@@ -74,7 +74,7 @@
         $profile_result = mysqli_fetch_array($profile_q);
 
 echo 
-'<form action="register.php" method="post" enctype="multipart/form-data"><div class="flex  items-center bg-gray-50">
+'<form action="edit_profile.php" method="post" enctype="multipart/form-data"><div class="flex  items-center bg-gray-50">
   
   <div class="bg-white grid grid-cols-4 gap-4 py-8 rounded-md">
    

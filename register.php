@@ -25,6 +25,7 @@ header("Location: home.php");
         $date_of_birth=$_POST["dof"];
         $address=$_POST["address"];
         $password=$_POST["password"];
+        
         if (isset($_FILES["profile_pic"])){
 
 
@@ -49,23 +50,26 @@ header("Location: home.php");
         $sql = "INSERT INTO user_info VALUES('$username','$fname','$lname','$gender','$email','$phone_no','$date_of_birth','$address','$password')";
         }
         
-       try{
-        if (mysqli_query($conn, $sql)) {
-         
-           header("Location: login.php");
-            
-         die();
-         }
+     
+    
+    
+        try{
+          if (mysqli_query($conn, $sql)) {
+           
+             header("Location: login.php");
+              
+           die();
+           }
+  
+                } 
+          catch (Exception $e) {
+             $_SESSION['message'] = 'Registration failed. Please check your infomation. ';
+              header("Location: register.php");
+  
+               }
+      
 
-              } 
-        catch (Exception $e) {
-           $_SESSION['message'] = 'Registration failed. Please check your infomation. ';
-            header("Location: register.php");
 
-             }
-    
-    
-    
     
     
     }
@@ -76,12 +80,17 @@ header("Location: home.php");
 echo 
 
 '
+<form action="register.php" method="post" enctype="multipart/form-data">
 
-<div class="h-screen flex justify-center items-center  bg-gray-50"><form action="register.php" method="post" enctype="multipart/form-data"><div class="flex  items-center bg-gray-50">
+<div class="h-screen flex justify-center items-center  bg-gray-50" style="background-image: url(images/bg.jpg);><form action="register.php" method="post" enctype="multipart/form-data"><div class="flex border border-gray-300  px-12 py-4 items-center bg-gray-50">
   
   <div class="bg-white grid grid-cols-4 gap-4 py-8 rounded-md">
-   
-    <h1 class="text-gray-500 text-xl col-span-6 font-semibold"> Register   </h1>
+
+    <div class="w-full  col-span-4">
+    <h1 class="text-gray-600 text-xl col-span-6 font-semibold text-center mb-4"> Register   </h1>
+    <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
+    </div>
+    
     <?php echo $_SESSION["message"]?>
     <div class="col-span-2"  >
     <input class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-2 p-1" type="text" id="fname" name="fname" required placeholder="First Name" />

@@ -1,7 +1,7 @@
 
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
-<body>      <?php
+<div class="mx-6">      <?php
        
        if ($_SERVER["REQUEST_METHOD"]==="POST"){
 
@@ -21,12 +21,15 @@
         $status_id=$_GET["id"];
         $username = $_SESSION["username"];
 
-        $sql = "SELECT first_name,last_name,username, profile_pic, status_id,status_owner,status_content,status_image,status_date, (SELECT COUNT(*) from `status_comments` WHERE status_id = $status_id)'total_comments' FROM `status`  LEFT JOIN `user_info`  ON   status.status_owner=user_info.username  WHERE status_id = $status_id  ";
+        $sql = "SELECT first_name,last_name,username, profile_pic, status_id,status_owner,status_content,status_image,status_date, (SELECT COUNT(*) from `status_likes` WHERE status_id = $status_id)'total_likes',(SELECT COUNT(*) from `status_comments` WHERE status_id = $status_id)'total_comments' FROM `status`  LEFT JOIN `user_info`  ON   status.status_owner=user_info.username  WHERE status_id = $status_id  ";
         $result = mysqli_query($conn, $sql);
         $owner_profile_pic = "SELECT profile_pic from user_info where username='$username'";
         $profile_pic_res =mysqli_query($conn, $owner_profile_pic);
         $result_profile_pic=mysqli_fetch_array($profile_pic_res);
         $row = mysqli_fetch_array($result) ;
+
+        
+        
         
 
         
@@ -35,9 +38,11 @@
          
 
             echo
-            '<div class= "mt-10    rounded-md border  border-solid border-gray-300	max-w-xl	shadow-md	">
+            '<div class= "mt-10    	max-w-xl	shadow-md	">
             <div class="mx-4 mb-2 mt-6   block  text-sm text-gray-600 font-semibold   flex   justify-between ">
-            <div class="flex items-center">
+            
+            <div class="flex items-center ">
+           
             <img class="rounded-full" src="'.$row["profile_pic"].'" height=60 width=60/> <div  class="flex-col"><a class="mx-4 text-md  "  href="/profile.php?username='.$row["status_owner"].'">'.$row["first_name"].' '.$row["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 ">1 day</div></div></div>
         
             
@@ -59,8 +64,10 @@
             
             
             echo'
+            <div class="flex mx-auto mt-4 mb-4 px-4 border-l border-r border-t p-2 border-gray-300 "><a href="#" class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status.php?id='.$row["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a></div>
+
            
-            <div class=" p-4 flex  ">
+            <div class=" p-4 flex border-x border-gray-300 ">
             <div class="content-center	">
             <img class="rounded-full" src="'.$result_profile_pic["profile_pic"].'" height=80 width=80/>
         
@@ -75,24 +82,27 @@
 </div>
 </form > 
 </div>
+
+<div class="border-x border-gray-300 pb-10">
+
          
             
          ';
            
            
-           $comments_sql = "SELECT first_name,last_name,username, profile_pic, comment_id,comment_owner,comment_desc,  FROM `status_comments`  LEFT JOIN `user_info`  ON   status_comments.comment_owner=user_info.username  WHERE status_id = $status_id  " ;
+           $comments_sql = "SELECT first_name,last_name,username, profile_pic, comment_id,comment_owner,comment_desc  FROM `status_comments`  LEFT JOIN `user_info`  ON   status_comments.comment_owner=user_info.username  WHERE status_id = $status_id  " ;
            $comment_res = mysqli_query($conn,$comments_sql) ;
            while($cmt = mysqli_fetch_array($comment_res) ){
 
 
 
              echo'
-             <div class="mx-4 mt-5 "> <div class="flex items-center">
-             <img class="rounded-full" src="'.$cmt["profile_pic"].'" height=60 width=60/> <div  class="flex-col"><a class="mx-4 text-md  "  href="/profile.php?username='.$cmt["comment_owner"].'">'.$cmt["first_name"].' '.$cmt["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 ">1 day</div></div></div>
+             <div class="mx-5 mt-6 "> <div class="flex items-center">
+             <img class="rounded-full" src="'.$cmt["profile_pic"].'" height=40 width=40/> <div  class="flex-col"><a class="mx-4 text-sm font-semibold text-gray-700 "  href="/profile.php?username='.$cmt["comment_owner"].'">'.$cmt["first_name"].' '.$cmt["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 font-semibold ">1 day</div></div></div>
          
               
-   
-              <p class="mx-1 mt-3 text-sm  text-gray-800 "> '.$cmt["comment_desc"].'</p></div> 
+              <div class="flex"><div class="px-3 ">.</div>
+              <p class="mx-8 mt-2 text-sm  text-gray-700 "> '.$cmt["comment_desc"].'</p></div> </div>
               
               
              
@@ -103,13 +113,12 @@
         
 
         
-echo  '</div>';
+echo  '</div></div>';
 
 } 
     
 
 ?>
 
-</body>
+</div>
 <?php require_once "footer.php"; ?>
-</html>
