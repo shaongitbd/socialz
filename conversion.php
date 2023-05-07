@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $conversion_sql);
 
 
 $rows = [];
-echo '<h1 class="mt-20 mb-6 text-sm text-gray-600 font-semibold "> Your Messages</h1>';
+echo '<div class="mx-6"><h1 class="mt-20 mb-6 text-sm text-gray-600 font-semibold "><div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-300 shadow-sm"></div>  Your Messages</h1>';
 while($row = mysqli_fetch_array($result))
 {
     $id=$row["conversion_id"];
@@ -70,6 +70,6 @@ while($row = mysqli_fetch_array($result))
 ';
 }
 
-echo("</div>");
+echo("</div></div>");
 ?>
 

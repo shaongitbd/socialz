@@ -13,7 +13,7 @@ $username = $_SESSION["username"];
 
 $status_desc =  $_POST["status_desc"];
 
-if (isset($_FILES["status_image"])){
+if (isset($_FILES["status_image"])  && $_FILES["status_image"]!=''){
 
 
 $status_image = $_FILES["status_image"]["name"];
@@ -65,9 +65,9 @@ echo '
 <div class="container mx-auto px-6 mt-12  ">
 
 <form action="home.php" method="POST"  enctype="multipart/form-data">
-<textarea name="status_desc" type = "text" id="status_desc" rows="2" class="block w-1/3 border border-b px-4 py-3 rounded-md mb-2 " placeholder="Write your thoughts here.... "/></textarea>
-<input type="file" name="status_image" >
-<button type="submit" class="ml-1 block px-4 py-1 rounded-md bg-red-600 text-white text-sm font-semibold">Post</button>
+<textarea name="status_desc" type = "text" id="status_desc" rows="2" class="block w-1/3 border border-b px-4 py-3 rounded-md mb-2  border-gray-300 " placeholder="Write your thoughts here.... "/></textarea>
+<input class="text-sm" type="file" name="status_image" >
+<button type="submit" class="mt-2 ml-1 block px-8 py-2 rounded-md bg-gray-800 text-white text-md font-semibold">Post</button>
 
 </form >
 
@@ -90,10 +90,10 @@ echo '
 
 
 </p>
-<br/>
+<br/>';
+ if ($own_status["status_image"]!='') { echo '<img src="'.$own_status["status_image"].'"  width=600 height=400 /> '; } 
 
-<img src="'.$own_status["status_image"].'"  width=600 height=400 />
-<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/liked.php?id='.$own_status["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$own_status["total_likes"].' Likes</a><a href="/status?id="'.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+echo'<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/liked.php?id='.$own_status["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$own_status["total_likes"].' Likes</a><a href="/status.php?id='.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
 
 
 
@@ -111,8 +111,8 @@ while($row=mysqli_fetch_array($result2)){
  
 
 echo '
-<div class= "mt-10 px-2  rounded-sm border-2  border-solid border-slate-200	max-w-md shadow-sm">
-<div class="mb-2 mt-6   block  text-sm text-gray-600 font-semibold   flex   justify-between ">
+<div class= "mt-10    rounded-md border  border-solid border-gray-300	max-w-lg	 shadow-sm">
+            <div class="mx-4 mb-2 mt-6   block  text-sm text-gray-600 font-semibold   flex   justify-between ">
 <div class="flex items-center">
 <img class="rounded-full" src="'.$row["profile_pic"].'" height=60 width=60/> <a class="mx-4 text-sm "  href="/profile.php?username='.$row["status_owner"].'">'.$row["status_owner"].'</a></div>
  
@@ -120,7 +120,7 @@ echo '
  </div>
 
 
-<p class=" mx-2 mt-4 text-sm text-gray-500">
+ <p class=" mx-6 mt-4 text-sm text-gray-500">
 
 
 '.$row["status_content"].' 
@@ -128,9 +128,12 @@ echo '
 
 </p>
 <br/>
+';
 
-<img src="'.$row["status_image"].'"  width=600 height=400 />
-<div class="flex mx-auto mt-4 "><a href="/liked.php?id='.$row["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status?id="'.$row["status_id"].'"  class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
+if ($row["status_image"]!='') { echo '<img src="'.$row["status_image"].'"  width=600 height=400 /> '; } 
+
+echo'
+<div class="flex mx-auto mt-4 mb-4 px-4"><a href="/liked.php?id='.$row["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status.php?id='.$row["status_id"].'"  class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
 
 
 
