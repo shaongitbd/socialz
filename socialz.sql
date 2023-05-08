@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:31 PM
+-- Generation Time: May 08, 2023 at 01:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,13 @@ CREATE TABLE `comment_likes` (
   `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `comment_likes`
+--
+
+INSERT INTO `comment_likes` (`comment_like_id`, `liked_by`, `comment_id`, `time`) VALUES
+(1, 'rabbi', 20, '2023-05-08 10:11:27');
+
 -- --------------------------------------------------------
 
 --
@@ -53,9 +60,8 @@ CREATE TABLE `conversion` (
 INSERT INTO `conversion` (`conversion_id`, `friend_one`, `friend_two`) VALUES
 (4, 'rabbi', 'begumRokeya'),
 (5, 'rabbi', 'sakib'),
-(14, 'sakib', 'sakib'),
-(15, 'sakib', 'sakib'),
-(16, 'nazmul', 'nazmul');
+(21, 'rabbi', 'tasin'),
+(23, 'rabbi', 'akashhalder');
 
 -- --------------------------------------------------------
 
@@ -74,22 +80,17 @@ CREATE TABLE `friends` (
 --
 
 INSERT INTO `friends` (`from_friend`, `to_friend`, `added_date`) VALUES
+('akashhalder', 'agga', '2023-05-08 11:28:28'),
 ('akashhalder', 'begumRokeya', '2023-05-07 19:12:53'),
-('akashhalder', 'rabbi', '2023-05-07 19:12:56'),
 ('begumRokeya', 'akashhalder', '2023-05-07 19:12:53'),
 ('begumRokeya', 'nazmul', '2023-05-07 19:06:59'),
 ('begumRokeya', 'sakib', '2023-05-07 13:46:22'),
-('fahimfaisal', 'rabbi', '2023-05-07 19:15:33'),
 ('nazmul', 'begumRokeya', '2023-05-07 19:06:59'),
-('nazmul', 'rabbi', '2023-05-07 19:10:13'),
-('rabbi', 'akashhalder', '2023-05-07 19:12:56'),
-('rabbi', 'fahimfaisal', '2023-05-07 19:15:33'),
-('rabbi', 'nazmul', '2023-05-07 19:10:13'),
-('rabbi', 'sakib', '2023-04-04 07:59:27'),
-('rabbi', 'tasin', '2023-05-07 19:19:04'),
+('rabbi', 'tasin', '2023-05-08 11:44:02'),
 ('sakib', 'begumRokeya', '2023-05-07 13:46:22'),
-('sakib', 'rabbi', '2023-04-04 07:59:27'),
-('tasin', 'rabbi', '2023-05-07 19:19:04');
+('shaongit', 'tasin', '2023-05-08 11:01:15'),
+('tasin', 'rabbi', '2023-05-08 11:44:02'),
+('tasin', 'shaongit', '2023-05-08 11:01:15');
 
 -- --------------------------------------------------------
 
@@ -120,10 +121,11 @@ INSERT INTO `message` (`message_id`, `from_friend`, `to_friend`, `msg_desc`, `ms
 (34, 'rabbi', 'sakib', 'a', '2023-04-04 02:47:00', 5),
 (35, 'rabbi', 'sakib', 'Ki koros?', '2023-04-04 02:47:49', 5),
 (36, 'rabbi', 'sakib', 'kire ?', '2023-04-04 07:57:43', 5),
-(37, 'sakib', 'sakib', 'hello', '2023-05-07 13:46:55', 14),
-(38, 'sakib', 'sakib', '?', '2023-05-07 16:31:27', 14),
-(39, 'sakib', 'sakib', '>', '2023-05-07 18:08:45', 14),
-(40, 'nazmul', 'nazmul', 'apni  kemnon achen>?', '2023-05-07 19:07:28', 16);
+(46, 'rabbi', 'tasin', 'a', '2023-05-07 19:47:27', 21),
+(47, 'rabbi', 'tasin', 'a', '2023-05-07 19:47:50', 21),
+(49, 'rabbi', 'akashhalder', 'a', '2023-05-07 19:52:05', 23),
+(50, 'rabbi', 'begumRokeya', 'nice work', '2023-05-08 10:22:10', 4),
+(51, 'rabbi', 'tasin', '', '2023-05-08 10:34:49', 21);
 
 -- --------------------------------------------------------
 
@@ -133,8 +135,29 @@ INSERT INTO `message` (`message_id`, `from_friend`, `to_friend`, `msg_desc`, `ms
 
 CREATE TABLE `pending_request` (
   `from_friend` varchar(255) NOT NULL,
-  `to_friend` varchar(255) NOT NULL
+  `to_friend` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `request_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pending_request`
+--
+
+INSERT INTO `pending_request` (`from_friend`, `to_friend`, `status`, `request_by`) VALUES
+('agga', 'akashhalder', 'accept', 'agga');
+
+--
+-- Triggers `pending_request`
+--
+DELIMITER $$
+CREATE TRIGGER `friend_accept` BEFORE UPDATE ON `pending_request` FOR EACH ROW insert into `friends`(from_friend, to_friend) VALUES (old.from_friend, old.to_friend)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `friend_accept_2` BEFORE UPDATE ON `pending_request` FOR EACH ROW insert into `friends`(from_friend, to_friend) VALUES (old.to_friend, old.from_friend)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -191,30 +214,16 @@ CREATE TABLE `status_comments` (
   `status_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
   `comment_owner` varchar(11) NOT NULL,
-  `comment_desc` varchar(11) NOT NULL
+  `comment_desc` varchar(11) NOT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `status_comments`
 --
 
-INSERT INTO `status_comments` (`status_id`, `comment_id`, `comment_owner`, `comment_desc`) VALUES
-(17, 1, 'sakib', 'wow'),
-(15, 2, 'sakib', 'adadd'),
-(15, 3, 'sakib', 'adad'),
-(15, 4, 'sakib', 'is this wor'),
-(15, 5, 'sakib', 'nice post m'),
-(15, 6, 'sakib', 'nice poost '),
-(15, 7, 'sakib', 'adadadadada'),
-(15, 8, 'sakib', 'wtf is goin'),
-(15, 9, 'sakib', 'is this wor'),
-(13, 10, 'sakib', 'Hi '),
-(13, 11, 'sakib', 'thnaks'),
-(12, 12, 'sakib', 'thank you b'),
-(12, 13, 'sakib', 'thank to'),
-(12, 14, 'sakib', 'thank you b'),
-(17, 15, 'nazmul', 'hi nani'),
-(25, 16, 'rabbi', 'nice bro');
+INSERT INTO `status_comments` (`status_id`, `comment_id`, `comment_owner`, `comment_desc`, `comment_date`) VALUES
+(26, 20, 'rabbi', 'a', '2023-05-08 09:11:57');
 
 -- --------------------------------------------------------
 
@@ -234,7 +243,10 @@ CREATE TABLE `status_likes` (
 --
 
 INSERT INTO `status_likes` (`likes_id`, `liked_by`, `status_id`, `Time`) VALUES
-(1, 'sakib', 15, '2023-04-04 08:49:54');
+(1, 'sakib', 15, '2023-04-04 08:49:54'),
+(6, 'rabbi', 26, '0000-00-00 00:00:00'),
+(7, 'rabbi', 25, '0000-00-00 00:00:00'),
+(8, 'rabbi', 24, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -282,8 +294,8 @@ INSERT INTO `user_info` (`username`, `first_name`, `last_name`, `gender`, `email
 --
 ALTER TABLE `comment_likes`
   ADD PRIMARY KEY (`comment_like_id`),
-  ADD KEY `comment_id` (`comment_id`),
-  ADD KEY `liked_by` (`liked_by`);
+  ADD KEY `liked_by` (`liked_by`),
+  ADD KEY `comment_id` (`comment_id`);
 
 --
 -- Indexes for table `conversion`
@@ -313,8 +325,9 @@ ALTER TABLE `message`
 -- Indexes for table `pending_request`
 --
 ALTER TABLE `pending_request`
-  ADD KEY `from_friend` (`from_friend`),
-  ADD KEY `to_friend` (`to_friend`);
+  ADD PRIMARY KEY (`from_friend`,`to_friend`),
+  ADD KEY `to_friend` (`to_friend`),
+  ADD KEY `request_by` (`request_by`);
 
 --
 -- Indexes for table `status`
@@ -353,19 +366,19 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `comment_likes`
 --
 ALTER TABLE `comment_likes`
-  MODIFY `comment_like_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `conversion`
 --
 ALTER TABLE `conversion`
-  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `conversion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -377,13 +390,13 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `status_comments`
 --
 ALTER TABLE `status_comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `status_likes`
 --
 ALTER TABLE `status_likes`
-  MODIFY `likes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `likes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -393,8 +406,8 @@ ALTER TABLE `status_likes`
 -- Constraints for table `comment_likes`
 --
 ALTER TABLE `comment_likes`
-  ADD CONSTRAINT `comment_likes_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `status_comments` (`comment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comment_likes_ibfk_2` FOREIGN KEY (`liked_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comment_likes_ibfk_2` FOREIGN KEY (`liked_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_likes_ibfk_3` FOREIGN KEY (`comment_id`) REFERENCES `status_comments` (`comment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `conversion`
@@ -423,7 +436,8 @@ ALTER TABLE `message`
 --
 ALTER TABLE `pending_request`
   ADD CONSTRAINT `pending_request_ibfk_1` FOREIGN KEY (`from_friend`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pending_request_ibfk_2` FOREIGN KEY (`to_friend`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pending_request_ibfk_2` FOREIGN KEY (`to_friend`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pending_request_ibfk_3` FOREIGN KEY (`request_by`) REFERENCES `user_info` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `status`
