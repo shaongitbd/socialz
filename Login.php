@@ -18,7 +18,7 @@ header("Location: home.php");
 
         $sql = "select * from  user_info where username='$username' and password = '$password'";
         $result = mysqli_query($conn, $sql);
-          echo mysqli_num_rows($result);
+          
 
     
         if (mysqli_num_rows($result) != 0) {

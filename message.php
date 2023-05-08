@@ -2,6 +2,8 @@
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
 <?php require_once "auth_check.php"; ?>
+<div class="mx-6"><h1 class="mt-20 mb-6 text-sm text-gray-600 font-semibold "><div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-300 shadow-sm"></div>
+
 
 <?php
 
@@ -26,6 +28,19 @@ else{
 
 
 }
+
+$user_info_sql = "SELECT first_name,last_name,profile_pic,username from user_info where username='$friend'";
+$user_info_exec = mysqli_query($conn, $user_info_sql);
+$user_info = mysqli_fetch_array($user_info_exec);
+
+echo'<div class="mb-20 rounded-md border border-gray-200 shadow-md flex bg-gray-100 w-1/2 px-2 py-2 items-center "><div class="content-center	">
+<img class="rounded-full" src="'.$user_info["profile_pic"].'" height=40 width=40/>
+
+ 
+
+ </div>
+ <a class="text-lg mx-4  font-semibold  text-gray-700" href="profile.php?username='.$friend.'">'.$user_info["first_name"].' '.$user_info["last_name"].'</a></div>';
+
 
 if(isset($_POST["msg_desc"])){
     $msg_desc = $_POST["msg_desc"];
@@ -74,9 +89,10 @@ while($row = mysqli_fetch_array($result))
 echo'<div class="max-w-md p-6"><form  action="message.php?id='.$conversion_id.'" method="POST" enctype="multipart/form-data">
 <textarea name="msg_desc" type="text" id="status_desc" rows="4" class="block  border border-b px-4 py-3 rounded-md mb-2  w-full" placeholder="your messsage.... "></textarea>
 <input class="text-sm font-semibold  py-2" type="file" name="msg_image">
-<button type="submit" class="ml-1 block px-6 py-2 rounded-md bg-red-700 text-white text-sm font-semibold w-md">Send</button>
+<button class="mt-4 text-white block px-6 py-2.5  w-full  bg-gray-700 rounded-lg text-sm font-semibold"  type="submit" > Send </button>  
+</form></div>
 
-</form></div>';
+</div>';
 
 
 

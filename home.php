@@ -2,7 +2,7 @@
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
 <?php require_once "auth_check.php"; ?>
-
+<?php require_once "time.php"; ?>
 
 
 <?php 
@@ -50,14 +50,17 @@ mysqli_query($conn, $sql);
 }
 $username = $_SESSION["username"];
 
-$own_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT  `profile_pic` from `user_info` WHERE username='$username')'profile_pic',status_id,status_owner,status_content,status_image,(SELECT COUNT(*) from `status_likes` WHERE temp.status_id = status_id)'total_likes', TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp  WHERE status_owner = '$username' ORDER BY status_date DESC LIMIT 1";
+$own_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT  `profile_pic` from `user_info` WHERE username='$username')'profile_pic',status_id,(SELECT first_name from user_info where username='$username')first_name,(SELECT last_name from user_info where username='$username')last_name,status_owner,status_content,status_image,(SELECT COUNT(*) from `status_likes` WHERE temp.status_id = status_id)'total_likes', TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour',status_date FROM `status` AS temp  WHERE status_owner = '$username' ORDER BY status_date DESC LIMIT 1";
 $result = mysqli_query($conn, $own_status_sql);
 
 $own_status = mysqli_fetch_array($result);
 
 
-$friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT COUNT(*) from `status_likes` WHERE status_id = temp.status_id)'total_likes',(SELECT  `profile_pic` from `user_info` WHERE username=temp.status_owner)'profile_pic', status_id,status_owner,status_content,status_image, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
+$friends_status_sql = "SELECT (SELECT COUNT(*) from `status_comments` WHERE status_id = temp.status_id)'total_comments',(SELECT COUNT(*) from `status_likes` WHERE status_id = temp.status_id)'total_likes',(SELECT first_name from user_info where username=temp.status_owner)first_name,(SELECT last_name from user_info where username=temp.status_owner)last_name,(SELECT  `profile_pic` from `user_info` WHERE username=temp.status_owner)'profile_pic', status_id,status_owner,status_content,status_image,status_date, TIMESTAMPDIFF(day,status_date, CURRENT_TIMESTAMP)'day',TIMESTAMPDIFF(hour, CURRENT_TIMESTAMP,status_date)'hour' FROM `status` AS temp WHERE status_owner IN ((SELECT to_friend FROM `friends` WHERE from_friend='$username')) ORDER BY status_date DESC LIMIT 10;";
 $result2 = mysqli_query($conn, $friends_status_sql);
+
+$own_status_time_conv = time_con($own_status["status_date"]);
+
 
 echo'
 <div class="container mx-auto px-6 mt-12  ">
@@ -80,10 +83,22 @@ echo '
 
 <div class= "mt-10  border-2  border-solid border-slate-200	max-w-md shadow-sm">
 <div class="mb-2 mt-6  mx-4 block  text-sm text-gray-600 font-semibold   flex   justify-between ">
-<div class="flex items-center">
- <img class="rounded-full" src="'.$own_status["profile_pic"].'" height=60 width=60/> <a class="mx-4 text-sm "  href="/profile.php?username='.$own_status["status_owner"].'">'.$own_status["status_owner"].'</a></div>
+
+
+
+ <div class="flex items-center ">
  
- <div class="date " >'.$own_status["day"].' days '.$own_status["hour"]. ' hour  </div>
+ 
+ 
+
+           
+            <img class="rounded-full" src="'.$own_status["profile_pic"].'" height=60 width=60/> <div  class="flex-col"><a class="mx-4 text-md  "  href="/profile.php?username='.$own_status["status_owner"].'">'.$own_status["first_name"].' '.$own_status["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 ">'.$own_status_time_conv.'</div></div></div>
+        
+            
+           
+
+
+
  </div>
 
 
@@ -97,8 +112,10 @@ echo '
 <br/>';
  if ($own_status["status_image"]!='') { echo '<img src="'.$own_status["status_image"].'"  width=600 height=400 /> '; } 
 
-echo'<div class="flex mx-auto mt-4 mb-4 px-4 "><a href="/liked.php?id='.$own_status["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$own_status["total_likes"].' Likes</a><a href="/status.php?id='.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
 
+
+
+echo'<div class="flex mx-auto mt-4 mb-4 px-4 "><a class="pr-4 text-xs text-gray-600 font-semibold" href="like.php?id='.$own_status["status_id"].'"> Like </a><a href="/liked.php?id='.$own_status["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold"><i class="fa fa-thumbs-up" aria-hidden="true"></i>            '.$own_status["total_likes"].' </a><a href="/status.php?id='.$own_status["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$own_status["total_comments"].' comments </a></div>
 
 
 
@@ -117,15 +134,29 @@ echo'
 
 while($row=mysqli_fetch_array($result2)){
  
+$friend_status_time_conv = time_con($row["status_date"]);
 
 echo '
 <div class= "mt-10    rounded-md border  border-solid border-gray-300	max-w-lg	 shadow-sm">
             <div class="mx-4 mb-2 mt-6   block  text-sm text-gray-600 font-semibold   flex   justify-between ">
-<div class="flex items-center">
-<img class="rounded-full" src="'.$row["profile_pic"].'" height=60 width=60/> <a class="mx-4 text-sm "  href="/profile.php?username='.$row["status_owner"].'">'.$row["status_owner"].'</a></div>
+
+
+
+ <div class="flex items-center ">
  
- <div class="date " >'.$row["day"].' days '.$row["hour"]. ' hour  </div>
- </div>
+ 
+ 
+
+           
+ <img class="rounded-full" src="'.$row["profile_pic"].'" height=60 width=60/> <div  class="flex-col"><a class="mx-4 text-md  "  href="/profile.php?username='.$row["status_owner"].'">'.$row["first_name"].' '.$row["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 ">'.$friend_status_time_conv.'</div></div></div>
+
+ 
+
+
+
+
+</div>
+
 
 
  <p class=" mx-6 mt-4 text-sm text-gray-500">
@@ -141,10 +172,8 @@ echo '
 if ($row["status_image"]!='') { echo '<img src="'.$row["status_image"].'"  width=600 height=400 /> '; } 
 
 echo'
-<div class="flex mx-auto mt-4 mb-4 px-4"><a href="/liked.php?id='.$row["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold">'.$row["total_likes"].' Likes</a><a href="/status.php?id='.$row["status_id"].'"  class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a><a class=" text-xs text-gray-600 font-semibold ">reply </a></div>
-
-
-
+<div class="flex mx-auto mt-4 mb-4 px-4">
+<a class="pr-4 text-xs text-gray-600 font-semibold" href="like.php?id='.$row["status_id"].'"> Like </a><a href="/liked.php?id='.$row["status_id"].'&status" class="pr-4 text-xs text-gray-600 font-semibold"><i class="fa fa-thumbs-up" aria-hidden="true"></i>            '.$row["total_likes"].' </a><a href="/status.php?id='.$row["status_id"].'" class=" pr-4  text-xs text-gray-600 font-semibold ">'.$row["total_comments"].' comments </a></div>
 
 
 </div>'

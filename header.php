@@ -16,6 +16,7 @@
 
 <?php
 session_start();
+date_default_timezone_set("UTC");
 if(isset($_SESSION["username"])){
 
 $username = $_SESSION["username"]; 
