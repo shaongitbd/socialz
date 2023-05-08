@@ -1,4 +1,3 @@
-
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
 
@@ -82,16 +81,16 @@ echo
 '
 <form action="register.php" method="post" enctype="multipart/form-data">
 
-<div class="h-screen flex justify-center items-center  bg-gray-50" style="background-image: url(images/bg.jpg);><form action="register.php" method="post" enctype="multipart/form-data"><div class="flex border border-gray-300  px-12 py-4 items-center bg-gray-50">
+<div class="  h-screen flex justify-center items-center  bg-gray-50" id="particles-js"><form action="register.php" method="post" enctype="multipart/form-data"><div class="absolute flex border border-gray-300 rounded-md px-12 py-4 items-center bg-gray-50">
   
-  <div class="bg-white grid grid-cols-4 gap-4 py-8 rounded-md">
+  <div class=" bg-white grid grid-cols-4 gap-4  py-8 rounded-md">
 
     <div class="w-full  col-span-6">
       <div class="mt-4 col-span-2 mb-10"><div  class="flex justify-center">
-     <img src="images/logo.png" width="140" height="120" /></div>
+     <img src="images/logo.gif" width="140" height="120" /></div>
     <h1 class="text-gray-600 text-xl col-span-6 font-semibold text-center mb-4"> Register   </h1>
    
-    <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
+    <div class="mt-4 flex-grow   border-2 border-gray-300 "></div>
     </div>
     
     <?php echo $_SESSION["message"]?>
