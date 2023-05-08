@@ -69,14 +69,14 @@ while($row = mysqli_fetch_array($result))
 <div class= "flex mt-2  grow-0 max-w-md p-4 ">
 <div>
 <img class="rounded-full" src="'.$row["profile_pic"].'"   width=60 height=60/></div>
-<p class="border-2 bg-gray-200 px-4 py-2  mx-4 text-sm text-gray-500  rounded-lg w-full ">
+<div class="flex flex-col w-full"><p class="px-5 mb-2">'.$row["first_name"].' '.$row["last_name"].'</p><p class="border-2 bg-gray-200 px-4 py-2  mx-4 text-sm text-gray-500  rounded-lg w-full ">
 
 '.$row["msg_desc"].'
 
 
 
 </p>
-
+</div>
 
 
 
