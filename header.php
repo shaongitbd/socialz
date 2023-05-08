@@ -21,7 +21,7 @@ if(isset($_SESSION["username"])){
 
 $username = $_SESSION["username"]; 
 
-echo'<div class="container mx-auto px-6 mt-12  "><div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="images/logo.png" width="120" height="160" /></div> <div class="flex flex-row p-4 space-x-6"> <a href="/home.php" class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a href="profile.php?username='.$username.'" class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a  href="conversion.php" class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
+echo'<div class="container mx-auto px-6 mt-12  "><div class="container flex items-center  border-b mx-auto space-x-12 "><div class="flex px-2 py-4"><img src="images/logo.gif" width="120" height="160" /></div> <div class="flex flex-row p-4 space-x-6"> <a href="/home.php" class="block text-gray-700 py-2 text-sm font-semibold "> Home </a> <a href="profile.php?username='.$username.'" class="block text-gray-700 py-2  text-sm font-semibold "> Profile</a> <a  href="conversion.php" class="block text-gray-700  py-2 text-sm font-semibold" href=""> Message </a> 
 
 <a class="block text-gray-700  py-2 text-sm font-semibold" href="friends.php"> Friends</a>
 
