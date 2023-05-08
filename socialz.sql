@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2023 at 01:45 PM
+-- Generation Time: May 08, 2023 at 02:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -39,7 +39,9 @@ CREATE TABLE `comment_likes` (
 --
 
 INSERT INTO `comment_likes` (`comment_like_id`, `liked_by`, `comment_id`, `time`) VALUES
-(1, 'rabbi', 20, '2023-05-08 10:11:27');
+(1, 'rabbi', 20, '2023-05-08 10:11:27'),
+(2, 'sakib', 21, '2023-05-08 12:24:50'),
+(3, 'rabbi', 21, '2023-05-08 12:25:22');
 
 -- --------------------------------------------------------
 
@@ -82,12 +84,20 @@ CREATE TABLE `friends` (
 INSERT INTO `friends` (`from_friend`, `to_friend`, `added_date`) VALUES
 ('akashhalder', 'agga', '2023-05-08 11:28:28'),
 ('akashhalder', 'begumRokeya', '2023-05-07 19:12:53'),
+('akashhalder', 'rabbi', '2023-05-08 12:27:09'),
 ('begumRokeya', 'akashhalder', '2023-05-07 19:12:53'),
 ('begumRokeya', 'nazmul', '2023-05-07 19:06:59'),
 ('begumRokeya', 'sakib', '2023-05-07 13:46:22'),
+('fahimfaisal', 'rabbi', '2023-05-08 12:31:00'),
 ('nazmul', 'begumRokeya', '2023-05-07 19:06:59'),
+('nazmul', 'rabbi', '2023-05-08 12:31:58'),
+('rabbi', 'akashhalder', '2023-05-08 12:27:09'),
+('rabbi', 'fahimfaisal', '2023-05-08 12:31:00'),
+('rabbi', 'nazmul', '2023-05-08 12:31:58'),
+('rabbi', 'sakib', '2023-05-08 12:25:05'),
 ('rabbi', 'tasin', '2023-05-08 11:44:02'),
 ('sakib', 'begumRokeya', '2023-05-07 13:46:22'),
+('sakib', 'rabbi', '2023-05-08 12:25:05'),
 ('shaongit', 'tasin', '2023-05-08 11:01:15'),
 ('tasin', 'rabbi', '2023-05-08 11:44:02'),
 ('tasin', 'shaongit', '2023-05-08 11:01:15');
@@ -202,7 +212,8 @@ INSERT INTO `status` (`status_id`, `status_owner`, `status_content`, `status_dat
 (25, 'tasin', 'vabuk mon', '2023-05-07 19:18:47', 'images/status/130268413_1808389805976564_7728801332392666972_n.jpg'),
 (26, 'rabbi', ':) great day ', '2023-05-07 19:20:13', 'images/status/335416615_1221502272085350_4866266929855674073_n.jpg'),
 (27, 'sakib', 'picnic day', '2023-05-07 19:22:15', 'images/status/323342984_738194827742391_9176065270690522609_n.jpg'),
-(28, 'akashhalder', 'শীত চলে গেলো যে,\r\nঢাকা ছেড়ে মুন্সিগঞ্জে।', '2023-05-07 19:23:50', 'images/status/329422656_548396793979576_1064017527336175259_n.jpg');
+(28, 'akashhalder', 'শীত চলে গেলো যে,\r\nঢাকা ছেড়ে মুন্সিগঞ্জে।', '2023-05-07 19:23:50', 'images/status/329422656_548396793979576_1064017527336175259_n.jpg'),
+(29, 'akashhalder', 'ami adhar alor josna', '2023-05-08 12:29:29', 'images/status/342537319_136888182611861_9080054569899670518_n.jpg');
 
 -- --------------------------------------------------------
 
@@ -223,7 +234,8 @@ CREATE TABLE `status_comments` (
 --
 
 INSERT INTO `status_comments` (`status_id`, `comment_id`, `comment_owner`, `comment_desc`, `comment_date`) VALUES
-(26, 20, 'rabbi', 'a', '2023-05-08 09:11:57');
+(26, 20, 'rabbi', 'a', '2023-05-08 09:11:57'),
+(27, 21, 'sakib', 'a', '2023-05-08 12:24:48');
 
 -- --------------------------------------------------------
 
@@ -366,7 +378,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `comment_likes`
 --
 ALTER TABLE `comment_likes`
-  MODIFY `comment_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `comment_like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `conversion`
@@ -384,13 +396,13 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `status_comments`
 --
 ALTER TABLE `status_comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `status_likes`
