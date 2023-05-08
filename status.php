@@ -89,7 +89,7 @@
 </form > 
 </div>
 
-<div class="border-x border-gray-300 pb-10">
+<div class="border-x border-gray-300 ">
 
          
             
@@ -105,7 +105,7 @@
 
 
              echo'
-             <div class="mx-5 mt-6 "> <div class="flex items-center">
+             <div class="mx-5  "> <div class="flex items-center">
              <img class="rounded-full" src="'.$cmt["profile_pic"].'" height=40 width=40/> <div  class="flex-col"><a class="mx-4 text-sm font-semibold text-gray-700 "  href="/profile.php?username='.$cmt["comment_owner"].'">'.$cmt["first_name"].' '.$cmt["last_name"].' </a> <div class="mx-4 text-sm text-gray-400 font-semibold ">'.$comment_date.'</div></div></div>
          
               
@@ -113,7 +113,7 @@
               <p class="mx-8 mt-2 text-sm  text-gray-700 "> '.$cmt["comment_desc"].'</p></div> </div>
               <div class="flex"><div class="px-3 ">.</div>
 
-              <div class="flex  mt-4 mb-4 px-4">
+              <div class="flex  mt-4 px-4">
 <a class="pr-4 text-xs text-gray-600 font-semibold" href="comment_like.php?id='.$cmt["comment_id"].'&status_id='.$status_id.'"> Like </a><a href="/liked.php?id='.$cmt["comment_id"].'&comment" class="pr-4 text-xs text-gray-600 font-semibold"><i class="fa fa-thumbs-up" aria-hidden="true"></i>            '.$cmt["total_likes"].'</div>
 
 
