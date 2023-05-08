@@ -2,7 +2,7 @@
 <?php require_once "header.php"; ?>
 <?php require_once "db.php"; ?>
 <?php require_once "auth_check.php"; ?>
-<div class="mx-6"><h1 class="mt-20 mb-6 text-sm text-gray-600 font-semibold "><div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-300 shadow-sm"></div>
+<div class="mx-6"><h1 class="mt-5 mb-6 text-sm text-gray-600 font-semibold "><div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-300 shadow-sm"></div>
 
 
 <?php
