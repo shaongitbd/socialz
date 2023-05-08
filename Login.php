@@ -53,7 +53,8 @@ echo
 '<div class=" h-screen flex justify-center items-center  bg-gray-50   "  style="background-image: url(images/bg.jpg);">
 
   <div class="border border-gray-300 bg-white   gap-2 px-8 py-6 rounded-md w-1/5 shadow-md ">
-     <div class="mt-4 col-span-2 mb-10">
+     <div class="mt-4 col-span-2 mb-10"><div  class="flex justify-center">
+     <img src="images/logo.png" width="140" height="120" /></div>
     <h1 class="text-gray-700 text-xl font-semibold text-center	"> Login </h1>
     <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
 

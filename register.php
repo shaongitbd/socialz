@@ -86,8 +86,11 @@ echo
   
   <div class="bg-white grid grid-cols-4 gap-4 py-8 rounded-md">
 
-    <div class="w-full  col-span-4">
+    <div class="w-full  col-span-6">
+      <div class="mt-4 col-span-2 mb-10"><div  class="flex justify-center">
+     <img src="images/logo.png" width="140" height="120" /></div>
     <h1 class="text-gray-600 text-xl col-span-6 font-semibold text-center mb-4"> Register   </h1>
+   
     <div class="mt-4 flex-grow border-2 border-gray-300 "></div>
     </div>
     
